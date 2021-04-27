@@ -198,14 +198,17 @@ class _HomePageState extends State<HomePage> {
                                 width: 150,
                                 height: 52,
                                 child: RaisedButton(
-                                  highlightColor: Colors.yellowAccent,
-                                  onPressed: onsearch,
+                                  highlightColor: Colors.pinkAccent,
+                                  onPressed: (){
+                                    //onsearch,
+                                    Get.to(() => KetquaSearch(day:pickday));
+                                  },
                                   child: Text(
                                     "Tìm vé xe",
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 18),
                                   ),
-                                  color: Colors.pinkAccent,
+                                  color: AppColors.background,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(20))),
@@ -223,7 +226,7 @@ class _HomePageState extends State<HomePage> {
                     "Lịch sử tìm kiếm ", style: AppThemes.Text18Medium,),
                 ),
                 Container(
-                  height: 200,
+                  height: 180,
                   decoration: BoxDecoration(
                       color: AppColors.primary,
                       // borderRadius: BorderRadius.circular(0),
@@ -239,9 +242,12 @@ class _HomePageState extends State<HomePage> {
                     scrollDirection: Axis.horizontal,
                     itemCount: 5,
                     itemBuilder: (context, index) {
-                      return Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 10),
-                          child: HistorySearch());
+                      return Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 0),
+                            child: HistorySearch()),
+                      );
                     },),
                 )
               ],
@@ -254,14 +260,6 @@ class _HomePageState extends State<HomePage> {
 
   void onsearch() {
     if (_noidi.text.isEmpty || _noiden.text.isEmpty) {
-      // Fluttertoast.showToast(msg: "Nhập nơi đến và nơi đi",
-      //   timeInSecForIos: 3,
-      //   gravity: ToastGravity.CENTER,
-      //   backgroundColor: Colors.white54,
-      //   textColor: Colors.black,
-      //   fontSize: 17,
-      //
-      // );
       Get.snackbar(
         'Lỗi tìm kiếm',
         'Nhập nơi đến và nơi đi',

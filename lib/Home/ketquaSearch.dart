@@ -7,7 +7,6 @@ import 'package:ticketapp/Home/selectChair.dart';
 import 'package:ticketapp/Theme/colors.dart';
 import 'package:ticketapp/Theme/styles.dart';
 
-import 'detailSearch.dart';
 
 class KetquaSearch extends StatelessWidget {
  late String day;
@@ -113,7 +112,7 @@ class KetquaSearch extends StatelessWidget {
                                 Text("Nhà xe: ${controllersearch.listsearch[index].nhaxe}",style: AppThemes.Text16,),
                                 Row(
                                   children: [
-                                    Text("Thời gian: "),
+                                    Text("Thời gian: ",style: AppThemes.Text16,),
                                     Text(controllersearch.listsearch[index].giodi,style: AppThemes.Text16Medium,),
                                     Icon(Icons.arrow_right_alt_sharp),
                                     Text(controllersearch.listsearch[index].gioden,style: AppThemes.Text16Medium,),

@@ -1,18 +1,36 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ticketapp/Controller/controller.dart';
 import 'package:ticketapp/Home/detailSearch.dart';
 import 'package:ticketapp/Theme/colors.dart';
 import 'package:ticketapp/Theme/styles.dart';
 
-class SelectChair extends StatelessWidget {
-  late String nhaxe,noidi,noiden,giodi,gioden,day;
+class SelectChair extends StatefulWidget {
+  late String nhaxe, noidi, noiden, giodi, gioden, day;
   late int giatien;
-  late String tang="2";
-  late String hang="b";
-  late String cho="5";
-  SelectChair({required this.noidi,required this.noiden,required this.nhaxe,required this.giodi,
-    required this.gioden,required this.giatien,required this.day});
+
+  SelectChair(
+      {required this.noidi,
+      required this.noiden,
+      required this.nhaxe,
+      required this.giodi,
+      required this.gioden,
+      required this.giatien,
+      required this.day});
+
+  @override
+  _SelectChairState createState() => _SelectChairState();
+}
+
+class _SelectChairState extends State<SelectChair> {
+
+  late String listcho = "5";
+
+  Color isSelect = Colors.white;
+
+  Controller controllerChair = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,57 +64,209 @@ class SelectChair extends StatelessWidget {
         ),
         backgroundColor: AppColors.scaffold,
       ),
-      body: Padding(
-          padding: EdgeInsets.all(15),
-          child: Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: AppColors.colors_icons,
-                boxShadow: [
-                  BoxShadow(
+      body: SingleChildScrollView(
+        padding: EdgeInsets.only(bottom: 30),
+        child: Padding(
+            padding: EdgeInsets.all(15),
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: AppColors.colors_icons,
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.shadow,
+                      blurRadius: 20,
+                      offset: Offset(4, 10),
+                    )
+                  ]),
+              child: Column(
+                children: [
+                  Container(
+                    height: 100,
+                    child: Row(
+                      children: [
+                        SizedBox(width: 20,),
+                        Container(
+                          height: 35,
+                          width: 35,
+                         decoration: BoxDecoration(
+                           color: AppColors.scaffold,
+                           borderRadius: BorderRadius.circular(50),
+                           border: Border.all(color: AppColors.background),
+                         ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 4,right: 15),
+                          child: Text("Còn trống"),
+                        ),
+                        Container(
+                          height: 35,
+                          width: 35,
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(50),
+                            border: Border.all(color: AppColors.background),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left:4,right: 15),
+                          child: Text("Đã đặt"),
+                        ),
+                        Container(
+                          height: 30,
+                          width: 30,
+                          decoration: BoxDecoration(
+                            color: AppColors.background,
+                            borderRadius: BorderRadius.circular(50),
+                            border: Border.all(color: AppColors.background),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 4),
+                          child: Text("Đang đặt"),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Divider(
+                    height: 20,
                     color: AppColors.shadow,
-                    blurRadius: 20,
-                    offset: Offset(4, 10),
-                  )
-                ]),
-            child: Column(
-              children: [
-                SizedBox(height: 100,),
-                RaisedButton(
-                  onPressed: (){
-                    Get.to(()=>DetailSearch(noidi:noidi,
-                      noiden:noiden,
-                      nhaxe:nhaxe,
-                      giodi:giodi,
-                      gioden:gioden,
-                      giatien:giatien,
-                      day: day,
-                      tang:tang,
-                      hang: hang,
-                      cho: cho,
+                    indent: 0,
+                    endIndent: 0,
+                    thickness: 4,
+                  ),
+                  SizedBox(height: 30,),
+                  Container(
+                    child: Row(
+                      children: [
+                        SizedBox(width: 100,),
+                        Expanded(child: Text("Tầng 1",style: AppThemes.Text18Medium,)),
 
-                    ));
+                        Text("Tầng 2",style: AppThemes.Text18Medium,),
+                        SizedBox(width: 100,),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 20,),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 50, right: 50),
+                    child: Container(
+                      height: 350,
+                      child: GridView.builder(
+                        itemCount: 30,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 6,
+                            crossAxisSpacing: 0,
+                            mainAxisSpacing: 20),
+                        itemBuilder: (BuildContext context, int index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(5),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  border: Border.all(color: AppColors.background),
+                                  color: controllerChair.IsSelectChair[index]?Colors.blue:controllerChair.listColor[index],
+                                  // boxShadow: [
+                                  //   BoxShadow(
+                                  //     color:
+                                  //         AppColors.background.withOpacity(0),
+                                  //     blurRadius: 5,
+                                  //     offset: Offset(1, 2),
+                                  //   )
+                                  // ]
+                              ),
+                              child: InkWell(
+                                onTap: (){
+                                  setState(() {
+                                    if (controllerChair.IsSelectChair[index]) {}
+                                    else {
+                                      if (controllerChair.listColor[index] == AppColors.background) {
+                                        controllerChair.listColor[index] = Colors.white;
+                                        controllerChair.listSelected.remove(controllerChair.listChair[index]);
 
-                  },
-                  color: AppColors.background,
-                  child: Container(
-                    width: 250,
-                    height: 40,
-                    child: Center(
-                      child: Text(
-                        "Chọn chỗ",
-                        style: AppThemes.text18container,
+                                      }
+                                      else {
+                                        controllerChair.listColor[index] = AppColors.background;
+                                        controllerChair.listSelected.add(controllerChair.listChair[index]);
+                                      }
+                                    }
+                                  });
+                                //  print(controllerChair.listSelected);
+                                },
+                                child: Center(
+                                    child: Text(controllerChair.listChair[index])),
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ),
-                  shape: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      borderSide:
-                      BorderSide(color: AppColors.background, width: 1)),
-                ),
-              ],
-            ),
-          )),
+                  Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Đang đặt: ${
+                            controllerChair.listSelected.length!=0?
+
+                            controllerChair.listSelected.join("  "):"..."
+                        } ",style: AppThemes.Text18Medium,),
+                        SizedBox(height: 10,),
+                        Text("Tổng tiền: ${controllerChair.listSelected.length*widget.giatien}đ",style: AppThemes.Text18Medium,),
+
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 50,bottom: 50),
+                    child: RaisedButton(
+                      onPressed: () {
+                        if(controllerChair.listSelected.length==0){
+                          Get.snackbar(
+                            'Lỗi chọn ghế',
+                            'Vui lòng chọn ghế ngồi',
+                            snackPosition: SnackPosition.BOTTOM,
+                            maxWidth: 350,
+
+                            backgroundColor: AppColors.color_snackbar,
+
+                          );
+                        }
+                        else{
+                        Get.to(() => DetailSearch(
+                              noidi: widget.noidi,
+                              noiden: widget.noiden,
+                              nhaxe: widget.nhaxe,
+                              giodi: widget.giodi,
+                              gioden: widget.gioden,
+                              giatien: widget.giatien,
+                              day: widget.day,
+                              listcho: controllerChair.listSelected,
+                            ));
+                      }
+                        },
+                      color: AppColors.background,
+                      child: Container(
+                        width: 250,
+                        height: 40,
+                        child: Center(
+                          child: Text(
+                            "Chọn chỗ",
+                            style: AppThemes.text18container,
+                          ),
+                        ),
+                      ),
+                      shape: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          borderSide:
+                              BorderSide(color: AppColors.background, width: 1)),
+                    ),
+                  ),
+                ],
+              ),
+            )),
+      ),
     );
   }
 }

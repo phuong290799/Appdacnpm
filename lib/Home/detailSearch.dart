@@ -1,25 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ticketapp/Controller/controller.dart';
+import 'package:ticketapp/Notify/notify.dart';
 import 'package:ticketapp/Theme/colors.dart';
 import 'package:ticketapp/Theme/styles.dart';
 
 class DetailSearch extends StatelessWidget {
-  late String nhaxe, noidi, noiden, giodi, gioden, day, tang,hang,cho;
+  late String nhaxe, noidi, noiden, giodi, gioden, day;
   late int giatien;
-  DetailSearch(
-      {required this.noidi,
-      required this.noiden,
-      required this.nhaxe,
-      required this.giodi,
-      required this.gioden,
-      required this.giatien,
-      required this.day,
-      required this.tang,
-      required this.hang,required this.cho});
+  Controller controllerDetail = Get.put(Controller());
+  List<String> listcho = [];
+  DetailSearch({
+    required this.noidi,
+    required this.noiden,
+    required this.nhaxe,
+    required this.giodi,
+    required this.gioden,
+    required this.giatien,
+    required this.day,
+    required this.listcho,
+  });
   @override
   Widget build(BuildContext context) {
-    Controller controllerDetail = Get.put(Controller());
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -43,7 +46,7 @@ class DetailSearch extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15)),
               ),
             ),
-            Text("Chi tiết vé xe", style: AppThemes.Text20Medium),
+            Text("Chi tiết vé xe", style: AppThemes.Text18Medium),
             SizedBox(
               width: 50,
             ),
@@ -51,23 +54,22 @@ class DetailSearch extends StatelessWidget {
         ),
         backgroundColor: AppColors.scaffold,
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(15),
-            child: Container(
-              height: 420,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: AppColors.colors_icons,
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.shadow,
-                      blurRadius: 20,
-                      offset: Offset(4, 10),
-                    )
-                  ]),
-              child: Container(
+      body: SingleChildScrollView(
+        padding: EdgeInsets.fromLTRB(15, 15, 15, 50),
+        child: Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              color: AppColors.colors_icons,
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.shadow,
+                  blurRadius: 20,
+                  offset: Offset(4, 10),
+                )
+              ]),
+          child: Column(
+            children: [
+              Container(
                 padding: EdgeInsets.only(left: 20, top: 30, right: 20),
                 child: Column(
                   children: [
@@ -82,7 +84,7 @@ class DetailSearch extends StatelessWidget {
                           width: 20,
                         ),
                         Text(controllerDetail.listinforAccount[0],
-                            style: AppThemes.Text20),
+                            style: AppThemes.Text18),
                       ],
                     ),
                     SizedBox(
@@ -99,7 +101,7 @@ class DetailSearch extends StatelessWidget {
                           width: 20,
                         ),
                         Text("(VN)+84:" + controllerDetail.listinforAccount[1],
-                            style: AppThemes.Text20),
+                            style: AppThemes.Text18),
                       ],
                     ),
                     SizedBox(
@@ -115,7 +117,7 @@ class DetailSearch extends StatelessWidget {
                         SizedBox(
                           width: 20,
                         ),
-                        Text("Gọi mình trước 20 phút", style: AppThemes.Text20),
+                        Text("Gọi mình trước 20 phút", style: AppThemes.Text18),
                       ],
                     ),
                     SizedBox(
@@ -131,7 +133,7 @@ class DetailSearch extends StatelessWidget {
                         SizedBox(
                           width: 20,
                         ),
-                        Text(noidi, style: AppThemes.Text20),
+                        Text(noidi, style: AppThemes.Text18),
                         Icon(Icons.arrow_right_alt_sharp),
                         Icon(
                           Icons.location_city_rounded,
@@ -141,7 +143,7 @@ class DetailSearch extends StatelessWidget {
                         SizedBox(
                           width: 20,
                         ),
-                        Text(noiden, style: AppThemes.Text20),
+                        Text(noiden, style: AppThemes.Text18),
                       ],
                     ),
                     SizedBox(
@@ -157,7 +159,7 @@ class DetailSearch extends StatelessWidget {
                         SizedBox(
                           width: 20,
                         ),
-                        Text("Ngày đi: " + "$day", style: AppThemes.Text20),
+                        Text("Ngày đi: " + "$day", style: AppThemes.Text18),
                       ],
                     ),
                     SizedBox(
@@ -173,15 +175,15 @@ class DetailSearch extends StatelessWidget {
                         SizedBox(
                           width: 20,
                         ),
-                        Text("Thời gian: ", style: AppThemes.Text20),
+                        Text("Thời gian: ", style: AppThemes.Text18),
                         Text(
                           giodi,
-                          style: AppThemes.Text20Medium,
+                          style: AppThemes.Text18Medium,
                         ),
                         Icon(Icons.arrow_right_alt_sharp),
                         Text(
                           gioden,
-                          style: AppThemes.Text20Medium,
+                          style: AppThemes.Text18Medium,
                         ),
                       ],
                     ),
@@ -199,8 +201,8 @@ class DetailSearch extends StatelessWidget {
                           width: 20,
                         ),
                         Text(
-                          "Tầng: $tang hàng $hang cho $cho",
-                          style: AppThemes.Text20,
+                          "Chỗ: ${listcho.join(" ")} ",
+                          style: AppThemes.Text18,
                         ),
                       ],
                     ),
@@ -219,37 +221,71 @@ class DetailSearch extends StatelessWidget {
                         ),
                         Text(
                           "Giá tiền: ",
-                          style: AppThemes.Text20,
+                          style: AppThemes.Text18,
                         ),
-                        Text("$giatien", style: AppThemes.Text20Medium),
+                        Text(
+                            "${giatien * controllerDetail.listSelected.length} đ",
+                            style: AppThemes.Text18Medium),
                       ],
                     ),
                   ],
                 ),
               ),
-            ),
-          ),
-          SizedBox(
-            height: 100,
-          ),
-          RaisedButton(
-            onPressed: () {},
-            color: AppColors.background,
-            child: Container(
-              width: 250,
-              height: 40,
-              child: Center(
-                child: Text(
-                  "Đặt xe",
-                  style: AppThemes.text18container,
+              Padding(
+                padding: const EdgeInsets.only(left:20,right:20,top: 30),
+                child: Text("Bạn phải thanh toán trước 50% giá vé",
+                    style: AppThemes.Text18),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left:20,right:20,top: 30),
+                child: Row(
+                  children: [
+                    Text("* Thanh toán trước:  ",
+                        style: TextStyle(color: Colors.red, fontSize: 18)),
+                    Container(
+                      height: 30,
+                      padding: EdgeInsets.only(left: 20,right: 20),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black, width: 1),
+                          borderRadius: BorderRadius.horizontal(
+                              left: Radius.zero, right: Radius.zero)),
+                      child: Center(
+                        child: Text(  "${giatien * controllerDetail.listSelected.length*0.5} đ"),
+                      ),
+                    )
+                  ],
                 ),
               ),
-            ),
-            shape: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-                borderSide: BorderSide(color: AppColors.background, width: 1)),
+              SizedBox(
+                height: 30,
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(30, 50, 30, 30),
+                child: RaisedButton(
+                  onPressed: () {
+                    Get.offAll(()=>Notify());
+
+                  },
+                  color: AppColors.background,
+                  child: Container(
+                    width: 250,
+                    height: 40,
+                    child: Center(
+                      child: Text(
+                        "Đặt xe",
+                        style: AppThemes.text18container,
+                      ),
+                    ),
+                  ),
+                  shape: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      borderSide:
+                          BorderSide(color: AppColors.background, width: 1)),
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
