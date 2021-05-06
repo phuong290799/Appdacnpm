@@ -21,11 +21,11 @@ List<Color> listColor=[Colors.white,Colors.white,Colors.white,Colors.white,Color
     // TicketObj("Hoàng Long","Huế", "Đà Nẵng", "6h", "8h"),
     // TicketObj("Văn Phương","Huế", "Đà Nẵng", "8h", "10h"),
   ];
-  List<String> listinforAccount = [
+  List<String> inforAccount = [
     "Phạm Văn Phương",
     "0776261632",
     "Quảng Bình",
-    "phuong@gmail.com"
+    "5277224242233"
   ];
   List<String> listChair = [
     "A1",

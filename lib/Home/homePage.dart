@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController _noidi = TextEditingController();
   final TextEditingController _noiden = TextEditingController();
   DateTime date = DateTime.now();
-  String pickday = DateFormat('EEEE, dd-MM-yyyy').format(DateTime.now());
+  String pickday = DateFormat('dd-MM-yyyy').format(DateTime.now());
 
   Future _selectDate() async {
     DateTime? picked = await showDatePicker(
@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
       firstDate: new DateTime(2020),
       lastDate: new DateTime(2022),
     );
-    pickday = DateFormat('EEEE, dd-MM-yyyy').format(picked!);
+    pickday = DateFormat('dd-MM-yyyy').format(picked!);
     if (picked != null) setState(() =>  pickday =  pickday.toString());
   }
 
@@ -115,6 +115,9 @@ class _HomePageState extends State<HomePage> {
                                   size: 40,
                                   color: AppColors.background,
                                 ),
+                                SizedBox(
+                                  width: 20,
+                                ),
                                 Container(
                                   height: 50,
                                   width: 250,
@@ -140,6 +143,9 @@ class _HomePageState extends State<HomePage> {
                                   Icons.my_location,
                                   size: 40,
                                   color: Colors.red,
+                                ),
+                                SizedBox(
+                                  width: 20,
                                 ),
                                 Container(
                                   width: 250,
@@ -167,6 +173,9 @@ class _HomePageState extends State<HomePage> {
                                   size: 40,
                                   color: Colors.blue,
                                 ),
+                                SizedBox(
+                                  width: 20,
+                                ),
                                 Container(
                                   child: GestureDetector(
                                     onTap: () {
@@ -176,16 +185,16 @@ class _HomePageState extends State<HomePage> {
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(20),
                                         border: Border.all(
-                                            width: 1, color: Colors.black45),
+                                            width: 1, color: Colors.black26),
                                       ),
                                       height: 50,
                                       width: 250,
-                                      child: Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(top: 15,left: 10),
                                         child: Text(
-                                          pickday,
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                color: Colors.black)),
+                                          "Ngày: $pickday"
+                                         ,
+                                            style: AppThemes.Text18),
                                       ),
                                     ),
                                   ),

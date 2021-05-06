@@ -98,17 +98,14 @@ class KetquaSearch extends StatelessWidget {
                         SizedBox(
                           height: 15,
                         ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child:
-                          Text("Ngày đi: $day",style: AppThemes.Text16,),
-                        ),
+
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                Text("Ngày đi: $day",style: AppThemes.Text16,),
                                 Text("Nhà xe: ${controllersearch.listsearch[index].nhaxe}",style: AppThemes.Text16,),
                                 Row(
                                   children: [
@@ -123,10 +120,7 @@ class KetquaSearch extends StatelessWidget {
                             ),
 
                             Expanded(child: SizedBox()),
-                            Container(
-                                height: 100,
-                                width: 150,
-                                child: Image.asset("assets/images/khach2.png")),
+                            Image.asset("assets/images/khach2.png",height:100,width:150,fit: BoxFit.cover,),
                           ],
                         ),
                         Row(

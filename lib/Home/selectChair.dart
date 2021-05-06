@@ -154,6 +154,7 @@ class _SelectChairState extends State<SelectChair> {
                     child: Container(
                       height: 350,
                       child: GridView.builder(
+                        physics: NeverScrollableScrollPhysics(),
                         itemCount: 30,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 6,

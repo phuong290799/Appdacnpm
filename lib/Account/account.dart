@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ticketapp/Account/fixAccount.dart';
 import 'package:ticketapp/Login/login.dart';
 import 'package:ticketapp/Theme/colors.dart';
 import 'package:ticketapp/Theme/styles.dart';
@@ -227,6 +228,7 @@ class _AccountState extends State<Account> {
   }
 
   void _fix() {
+    Get.to(()=> FixAccount());
   }
   void _quanly() {}
   void _ngonngu() {}

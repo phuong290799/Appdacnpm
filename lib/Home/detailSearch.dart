@@ -83,7 +83,7 @@ class DetailSearch extends StatelessWidget {
                         SizedBox(
                           width: 20,
                         ),
-                        Text(controllerDetail.listinforAccount[0],
+                        Text(controllerDetail.inforAccount[0],
                             style: AppThemes.Text18),
                       ],
                     ),
@@ -100,7 +100,7 @@ class DetailSearch extends StatelessWidget {
                         SizedBox(
                           width: 20,
                         ),
-                        Text("(VN)+84:" + controllerDetail.listinforAccount[1],
+                        Text("(VN)+84: ${controllerDetail.inforAccount[1]}" ,
                             style: AppThemes.Text18),
                       ],
                     ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ticketapp/Home/bott.dart';
 import 'package:ticketapp/Home/homePage.dart';
 import 'package:ticketapp/Login/login.dart';
 
@@ -13,7 +14,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Flutter Demo',
-      home: Login(),
+      home:MyHomePage(),
+      //home: Login(),
     );
   }
 }
