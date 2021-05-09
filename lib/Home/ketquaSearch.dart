@@ -9,6 +9,8 @@ import 'package:ticketapp/Theme/styles.dart';
 
 
 class KetquaSearch extends StatelessWidget {
+  String noidi,noiden,day;
+  KetquaSearch({required this.noidi,required this.noiden,required this.day});
   Controller controllersearch =Get.find();
   @override
   Widget build(BuildContext context) {

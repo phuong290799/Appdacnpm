@@ -3,13 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ticketapp/Models/accountObj.dart';
 import 'package:ticketapp/Models/chairObj.dart';
+import 'package:ticketapp/Models/searchObj.dart';
 import 'package:ticketapp/Models/ticketObj.dart';
 
 class Controller extends GetxController {
 var noidi = RxString("");
 var noiden = RxString("");
 var day = RxString("");
-
+//  List<SearchObj> listHistory = [];
+   RxList listHistoryday = [].obs;
+  RxList listHistorynoidi = [].obs;
+  RxList listHistorynoiden = [].obs;
   List<String> listSelected = [];
   List<TicketObj> listsearch = [
     TicketObj("Hạnh Luyến", "Quảng Bình", "Đà Nẵng", "6h", "10h", 200000,12),

@@ -236,9 +236,28 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 Container(
-                  child: Text(
-                    "Lịch sử tìm kiếm ", style: AppThemes.Text18Medium,),
+                  padding: EdgeInsets.only(left: 20,right: 20),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          "Lịch sử tìm kiếm ", style: AppThemes.Text18,),
+                      ),
+                      InkWell(
+                        onTap: (){
+                          controllerHome.listHistorynoidi.clear();
+                          controllerHome.listHistorynoiden.clear();
+                          controllerHome.listHistoryday.clear();
+                        },
+                        child: Text(
+                          "Xoá tất cả ", style: TextStyle(
+                          fontSize: 18,color: Colors.blue
+                        )),
+                      ),
+                    ],
+                  ),
                 ),
+                SizedBox(height: 20,),
                 Container(
                   height: 180,
                   decoration: BoxDecoration(
@@ -252,17 +271,24 @@ class _HomePageState extends State<HomePage> {
                         )
                       ]
                   ),
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 5,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(5),
-                        child: Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 0),
-                            child: HistorySearch()),
-                      );
-                    },),
+                  child: Obx(()=>
+                     ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: controllerHome.listHistorynoidi.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(5),
+                          child: Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 0),
+                              child: HistorySearch(
+                                noidi:controllerHome.listHistorynoidi[index],
+                                  noiden: controllerHome.listHistorynoiden[index],
+                                  day: controllerHome.listHistoryday[index],
+
+                              )),
+                        );
+                      },),
+                  ),
                 )
               ],
             ),
@@ -282,7 +308,15 @@ class _HomePageState extends State<HomePage> {
 
       );
     } else {
-      Get.to(() => KetquaSearch());
+      controllerHome.listHistorynoidi.add( controllerHome.noidi.value);
+      controllerHome.listHistorynoiden.add( controllerHome.noiden.value);
+      controllerHome.listHistoryday.add( controllerHome.day.value);
+      Get.to(() => KetquaSearch(
+        noidi:controllerHome.noidi.value,
+        noiden: controllerHome.noiden.value,
+        day: controllerHome.day.value,
+      ));
+
     }
   }
 }
