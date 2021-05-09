@@ -24,11 +24,6 @@ class SelectChair extends StatefulWidget {
 }
 
 class _SelectChairState extends State<SelectChair> {
-
-  late String listcho = "5";
-
-  Color isSelect = Colors.white;
-
   Controller controllerChair = Get.find();
 
   @override
@@ -130,7 +125,7 @@ class _SelectChairState extends State<SelectChair> {
                     ),
                   ),
                   Divider(
-                    height: 20,
+                    height: 0,
                     color: AppColors.shadow,
                     indent: 0,
                     endIndent: 0,
@@ -150,53 +145,57 @@ class _SelectChairState extends State<SelectChair> {
                   ),
                   SizedBox(height: 20,),
                   Padding(
-                    padding: const EdgeInsets.only(left: 50, right: 50),
-                    child: Container(
-                      height: 350,
+                    padding: const EdgeInsets.only(left: 30, right: 30,bottom: 20),
+                    child: Container(padding: EdgeInsets.all(10),
+                      height: 430,
+                      decoration: BoxDecoration(
+                        color: AppColors.scaffold,
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(width: 1,color: AppColors.scaffold),
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColors.shadow,
+                              blurRadius: 20,
+                              offset: Offset(4, 10),
+                            )
+                          ]),
                       child: GridView.builder(
                         physics: NeverScrollableScrollPhysics(),
-                        itemCount: 30,
+                        itemCount: controllerChair.listChair.length,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 6,
                             crossAxisSpacing: 0,
-                            mainAxisSpacing: 20),
+                            mainAxisSpacing:20),
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(
                             padding: const EdgeInsets.all(5),
                             child: Container(
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50),
+                                  borderRadius: BorderRadius.circular(10),
                                   border: Border.all(color: AppColors.background),
-                                  color: controllerChair.IsSelectChair[index]?Colors.blue:controllerChair.listColor[index],
-                                  // boxShadow: [
-                                  //   BoxShadow(
-                                  //     color:
-                                  //         AppColors.background.withOpacity(0),
-                                  //     blurRadius: 5,
-                                  //     offset: Offset(1, 2),
-                                  //   )
-                                  // ]
+                                  color: controllerChair.listChair[index].tinhtrang?Colors.blue:controllerChair.listChair[index].colorChair,
+
                               ),
                               child: InkWell(
                                 onTap: (){
                                   setState(() {
-                                    if (controllerChair.IsSelectChair[index]) {}
+                                    if (controllerChair.listChair[index].tinhtrang) {}
                                     else {
-                                      if (controllerChair.listColor[index] == AppColors.background) {
-                                        controllerChair.listColor[index] = Colors.white;
-                                        controllerChair.listSelected.remove(controllerChair.listChair[index]);
+                                      if (controllerChair.listChair[index].colorChair == AppColors.background) {
+                                        controllerChair.listChair[index].colorChair = Colors.white;
+                                        controllerChair.listSelected.remove(controllerChair.listChair[index].name);
 
                                       }
                                       else {
-                                        controllerChair.listColor[index] = AppColors.background;
-                                        controllerChair.listSelected.add(controllerChair.listChair[index]);
+                                        controllerChair.listChair[index].colorChair = AppColors.background;
+                                        controllerChair.listSelected.add(controllerChair.listChair[index].name);
                                       }
                                     }
                                   });
                                 //  print(controllerChair.listSelected);
                                 },
                                 child: Center(
-                                    child: Text(controllerChair.listChair[index])),
+                                    child: Text(controllerChair.listChair[index].name)),
                               ),
                             ),
                           );

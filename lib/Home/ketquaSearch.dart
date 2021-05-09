@@ -9,9 +9,7 @@ import 'package:ticketapp/Theme/styles.dart';
 
 
 class KetquaSearch extends StatelessWidget {
- late String day;
-  KetquaSearch({required this.day});
-  Controller controllersearch =Get.put(Controller());
+  Controller controllersearch =Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,120 +44,226 @@ class KetquaSearch extends StatelessWidget {
         backgroundColor: AppColors.scaffold,
 
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(15),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            color: AppColors.colors_icons,
-              boxShadow: [
-                BoxShadow(
-              color: AppColors.shadow,
-                  blurRadius: 20,
-                  offset: Offset(4,10),
-          )
-              ]
-          ),
-          height: MediaQuery.of(context).size.height,
-          child: controllersearch.listsearch.length!=0?
-          ListView.builder(
-            itemCount: controllersearch.listsearch.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Container(
-                  padding: EdgeInsets.only(left: 20,right: 20,),
-                  margin: EdgeInsets.symmetric(vertical: 5),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: AppColors.scaffold,
-                    boxShadow: [
-                    BoxShadow(
-                    color: AppColors.shadow,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(15),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              color: AppColors.colors_icons,
+                boxShadow: [
+                  BoxShadow(
+                color: AppColors.shadow,
                     blurRadius: 20,
                     offset: Offset(4,10),
-                  )
-                    ]
-                  ),
-                  child:GestureDetector(
-                    onTap: () {
-                      Get.to(()=>SelectChair(noidi:controllersearch.listsearch[index].noidi,
-                          noiden:controllersearch.listsearch[index].noiden,
-                        nhaxe:controllersearch.listsearch[index].nhaxe,
-                          giodi:controllersearch.listsearch[index].giodi,
-                          gioden:controllersearch.listsearch[index].gioden,
-                          giatien:controllersearch.listsearch[index].giatien,
-                        day: day,
-
-                      ));
-                    },
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 15,
-                        ),
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Ngày đi: $day",style: AppThemes.Text16,),
-                                Text("Nhà xe: ${controllersearch.listsearch[index].nhaxe}",style: AppThemes.Text16,),
-                                Row(
-                                  children: [
-                                    Text("Thời gian: ",style: AppThemes.Text16,),
-                                    Text(controllersearch.listsearch[index].giodi,style: AppThemes.Text16Medium,),
-                                    Icon(Icons.arrow_right_alt_sharp),
-                                    Text(controllersearch.listsearch[index].gioden,style: AppThemes.Text16Medium,),
-                                  ],
-                                ),
-                                Text("Giá tiền: ${controllersearch.listsearch[index].giatien}đ",style: AppThemes.Text16,),
-                              ],
-                            ),
-
-                            Expanded(child: SizedBox()),
-                            Image.asset("assets/images/khach2.png",height:100,width:150,fit: BoxFit.cover,),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Icon(
-                              Icons.my_location,
-                              size: 30,
+            )
+                ]
+            ),
+            child: Column(
+              children: [
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: Center(child: Text("Ngày đi: ${controllersearch.day.value}",style: AppThemes.Text18Medium,)),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(left: 20,right: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.my_location,
+                            size: 30,
+                            color: AppColors.background,
+                          ),
+                          SizedBox(width: 10,),
+                          Flexible(child: Text(controllersearch.noidi.value,style: AppThemes.Text18Medium,)),
+                          Center(
+                            child: Icon(
+                              Icons.arrow_right_alt_outlined,
+                              size: 40,
                               color: AppColors.background,
                             ),
-                            Text(controllersearch.listsearch[index].noidi,style: AppThemes.Text18Medium,),
-                            Center(
-                              child: Icon(
-                                Icons.arrow_right_alt_outlined,
-                                size: 40,
-                                color: AppColors.background,
-                              ),
-                            ),
-                            Icon(
-                              Icons.my_location,
-                              size: 30,
-                              color: Colors.red,
-                            ),
-                            Text(controllersearch.listsearch[index].noiden,style: AppThemes.Text18Medium,),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                      ],
+                          ),
+                          Icon(
+                            Icons.my_location,
+                            size: 30,
+                            color: Colors.red,
+                          ),
+                          SizedBox(width: 10,),
+                          Text(controllersearch.noiden.value,style: AppThemes.Text18Medium,),
+                        ],
+                      ),
                     ),
+                  ],
+                ),
+                Divider(
+                  thickness: 3,
+                  height: 40,
+                  color: AppColors.shadow.withOpacity(0.1),
+                ),
+
+                Container(
+                  height: MediaQuery.of(context).size.height-250,
+
+                  child: controllersearch.listsearch.length!=0?
+                  ListView.builder(
+                    itemCount: controllersearch.listsearch.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Container(
+                          margin: EdgeInsets.symmetric(vertical: 0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: AppColors.scaffold,
+                            boxShadow: [
+                            BoxShadow(
+                            color: AppColors.shadow,
+                            blurRadius: 20,
+                            offset: Offset(4,10),
+                          )
+                            ]
+                          ),
+                          child:InkWell(
+                            onTap: () {
+                              Get.to(()=>SelectChair(noidi:controllersearch.listsearch[index].bendi,
+                                  noiden:controllersearch.listsearch[index].benden,
+                                nhaxe:controllersearch.listsearch[index].nhaxe,
+                                  giodi:controllersearch.listsearch[index].giodi,
+                                  gioden:controllersearch.listsearch[index].gioden,
+                                  giatien:controllersearch.listsearch[index].giatien,
+                                day: controllersearch.day.value,
+
+                              ));
+                            },
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Container(
+                                  padding: EdgeInsets.only(left: 20,right: 20,),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(controllersearch.listsearch[index].giodi,style: AppThemes.Text20Bold,),
+                                      SizedBox(width: 10,),
+                                      Container(
+                                        height: 3,
+                                        width: 50,
+                                        color: AppColors.background,
+                                      ),
+                                      SizedBox(width: 10,),
+                                      Text(controllersearch.listsearch[index].gioden,style: AppThemes.Text20Bold,),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.only(left: 20,right: 20,),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(controllersearch.listsearch[index].bendi,style: TextStyle(fontSize: 16,color: Colors.blue),),
+                                      Icon(Icons.arrow_right_alt_sharp),
+                                      Text(controllersearch.listsearch[index].benden,style: TextStyle(fontSize: 16,color: Colors.red),),
+                                    ],
+                                  ),
+                                ),
+
+                                Divider(
+                                  thickness: 1,
+                                  height: 0,
+                                  color: AppColors.shadow.withOpacity(0.05),
+                                ),
+
+                                Container(
+                                  padding: EdgeInsets.only(left: 20,right: 20,),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        height: 40,
+                                        width: 40,
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(100),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: AppColors.shadow.withOpacity(0.1),
+                                                blurRadius: 10,
+                                                offset: Offset(0,1),
+                                              )
+                                            ]
+                                        ),
+                                        child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(100),
+                                            child: Container(
+                                                height:100,width:100,
+
+                                                child: Image.asset("assets/images/khach2.png",fit: BoxFit.cover,))),
+                                      ),
+                                      Text(" ${controllersearch.listsearch[index].nhaxe}   ",style: AppThemes.Text16,),
+                                      Image.asset("assets/images/ic_crown.png",fit: BoxFit.cover,),
+                                      Text("  Top",style: AppThemes.Text14,),
+
+                                      Expanded(child: SizedBox()),
+                                      Image.asset("assets/images/ic_star.png",fit: BoxFit.cover,),
+                                      Text(" 5.0",style: AppThemes.Text14Medium,),
+
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top:10,left: 20),
+                                  child: Text("Giá tiền: ${controllersearch.listsearch[index].giatien}đ",style: AppThemes.Text16,),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top:10,left: 20),
+                                  child: Text("Còn: ${controllersearch.listsearch[index].ghetrong} ghế trống",style: AppThemes.Text16,),
+                                ),
+
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Container(
+                                height: 20,
+
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(15),
+                                        bottomRight: Radius.circular(15)
+                                      ),
+                                      color: AppColors.background,
+                                  ),
+                                )
+
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+
+                    },
+                  ):Container(
+                    child: Center(child: Text("Vui lòng đợi hoặc thử lại!")),
                   ),
                 ),
-              );
+                Container(
+                  height: 20,
 
-            },
-          ):Container(
-            child: Center(child: Text("Vui lòng đợi hoặc thử lại!")),
-          )
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(15),
+                        bottomRight: Radius.circular(15)
+                    ),
+                    color: AppColors.scaffold,
+                  ),
+                )
+              ],
+            )
+          ),
         ),
       ),
     );

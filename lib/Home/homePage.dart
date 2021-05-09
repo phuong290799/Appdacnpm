@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:ticketapp/Controller/controller.dart';
 import 'package:ticketapp/Home/historySearch.dart';
 import 'package:ticketapp/Home/ketquaSearch.dart';
 import 'package:ticketapp/Theme/colors.dart';
@@ -29,16 +30,16 @@ class _HomePageState extends State<HomePage> {
       lastDate: new DateTime(2022),
     );
     pickday = DateFormat('dd-MM-yyyy').format(picked!);
-    if (picked != null) setState(() =>  pickday =  pickday.toString());
+    if (picked != null)  pickday =  pickday.toString();
+    controllerHome.day.value = pickday;
   }
-
+  Controller controllerHome = Get.put(Controller());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Container(
           // height: MediaQuery.of(context).size.height,
-          constraints: BoxConstraints.expand(),
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
@@ -191,10 +192,12 @@ class _HomePageState extends State<HomePage> {
                                       width: 250,
                                       child: Padding(
                                         padding: const EdgeInsets.only(top: 15,left: 10),
-                                        child: Text(
-                                          "Ngày: $pickday"
-                                         ,
-                                            style: AppThemes.Text18),
+                                        child: Obx(()=>
+                                          Text(
+                                            "Ngày: ${controllerHome.day.value!=""?controllerHome.day.value:pickday}"
+                                           ,
+                                              style: AppThemes.Text18),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -209,8 +212,10 @@ class _HomePageState extends State<HomePage> {
                                 child: RaisedButton(
                                   highlightColor: Colors.pinkAccent,
                                   onPressed: (){
-                                    //onsearch,
-                                    Get.to(() => KetquaSearch(day:pickday));
+                                    controllerHome.day.value = pickday;
+                                    controllerHome.noidi.value=_noidi.text;
+                                    controllerHome.noiden.value =_noiden.text ;
+                                    onsearch();
                                   },
                                   child: Text(
                                     "Tìm vé xe",
@@ -277,7 +282,7 @@ class _HomePageState extends State<HomePage> {
 
       );
     } else {
-      Get.to(() => KetquaSearch(day:pickday));
+      Get.to(() => KetquaSearch());
     }
   }
 }
