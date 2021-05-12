@@ -25,7 +25,7 @@ class _FixAccountState extends State<FixAccount> {
           children: [
             InkWell(
               onTap: () {
-                Get.back();
+                Navigator.pop(context);
               },
               child: Container(
                 height: 50,

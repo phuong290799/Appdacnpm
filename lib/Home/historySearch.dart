@@ -66,7 +66,6 @@ class HistorySearch extends StatelessWidget {
               color: AppColors.background,
             ),
           )
-
         ],
       ),
 

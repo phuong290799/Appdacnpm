@@ -41,7 +41,7 @@ class AppThemes {
       fontSize: 18, color: Color(0xff292929),fontFamily:'Roboto_Regular');
   static const TextStyle Text20 = TextStyle(
       fontSize: 20, color: Color(0xff292929),fontFamily:'Roboto_Regular');
-
+  static const Color scaffold2 = Color(0xffffffff);
 
 
 

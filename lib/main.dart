@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ticketapp/Home/bott.dart';
+import 'package:ticketapp/Home/bottom_nav_bar.dart';
 import 'package:ticketapp/Home/bottomnav.dart';
+import 'package:ticketapp/LocalizationService.dart';
+import 'package:ticketapp/test.dart';
 
 
 void main() {
@@ -14,8 +16,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Flutter Demo',
-      home:bottomNav(),
-      //home: Login(),
+     // home:bottomNav(),
+      // locale: LocalizationService.locale,
+      // fallbackLocale: LocalizationService.fallbackLocale,
+      // translations: LocalizationService(),
+      home: BottomNavBar(),
     );
   }
 }

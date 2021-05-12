@@ -263,7 +263,15 @@ class DetailSearch extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(30, 50, 30, 30),
                 child: RaisedButton(
                   onPressed: () {
-                    Get.offAll(()=>Notify());
+                    for (var i = 0; i < controllerDetail.listChair.length; i++){
+                      controllerDetail.listChair[i].colorChair= Colors.white;
+                    }
+                    controllerDetail.day.value="";
+                    controllerDetail.listSelected.clear();
+
+
+                 //   Navigator.push(context, MaterialPageRoute(builder: (context) =>Notify(),));
+                    Get.off(()=>Notify());
 
                   },
                   color: AppColors.background,

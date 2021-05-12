@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ticketapp/Home/bottom_nav_bar.dart';
 import 'package:ticketapp/Home/bottomnav.dart';
 import 'package:ticketapp/Home/homePage.dart';
 import 'package:ticketapp/Theme/colors.dart';
@@ -22,7 +23,7 @@ class _NotifyState extends State<Notify> {
           children: [
             InkWell(
               onTap: () {
-                Get.to(()=>bottomNav());
+               Get.to(()=>BottomNavBar());
               },
               child: Container(
                 height: 50,

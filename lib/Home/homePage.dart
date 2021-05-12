@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:ticketapp/Controller/controller.dart';
@@ -37,6 +36,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: SafeArea(
         child: Container(
           // height: MediaQuery.of(context).size.height,
@@ -259,7 +259,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 SizedBox(height: 20,),
                 Container(
-                  height: 180,
+                  height: 190,
                   decoration: BoxDecoration(
                       color: AppColors.primary,
                       // borderRadius: BorderRadius.circular(0),
@@ -308,7 +308,7 @@ class _HomePageState extends State<HomePage> {
 
       );
     } else {
-      controllerHome.listHistorynoidi.add( controllerHome.noidi.value);
+      controllerHome.listHistorynoidi.add(controllerHome.noidi.value);
       controllerHome.listHistorynoiden.add( controllerHome.noiden.value);
       controllerHome.listHistoryday.add( controllerHome.day.value);
       Get.to(() => KetquaSearch(
