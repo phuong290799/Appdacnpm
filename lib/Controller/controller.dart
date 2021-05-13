@@ -4,16 +4,18 @@ import 'package:get/get.dart';
 import 'package:ticketapp/Models/accountObj.dart';
 import 'package:ticketapp/Models/chairObj.dart';
 import 'package:ticketapp/Models/searchObj.dart';
+import 'package:ticketapp/Models/ticketInforObj.dart';
 import 'package:ticketapp/Models/ticketObj.dart';
 
 class Controller extends GetxController {
 var noidi = RxString("");
 var noiden = RxString("");
 var day = RxString("");
-//  List<SearchObj> listHistory = [];
-   RxList listHistoryday = [].obs;
-  RxList listHistorynoidi = [].obs;
-  RxList listHistorynoiden = [].obs;
+
+RxList listHistory = [].obs;
+
+
+
   List<String> listSelected = [];
   List<TicketObj> listsearch = [
     TicketObj("Hạnh Luyến", "Quảng Bình", "Đà Nẵng", "6h", "10h", 200000,12),
@@ -64,5 +66,7 @@ var day = RxString("");
     ChairObj(35, "B17", false,Colors.white),
     ChairObj(36, "B18", false,Colors.white),
   ];
+
+List<TicketInforObj> listTicketed = [];
 
 }

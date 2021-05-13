@@ -70,40 +70,15 @@ class _MyticketState extends State<Myticket> {
         ],
       ),
         ),
-        // appBar: AppBar(
-        //   title: Text("Vé của tôi"),
-        //   backgroundColor: Colors.blue,
-        //   bottom: TabBar(
-        //     tabs: [
-        //       Tab(
-        //           child: Text(
-        //             "Vé hiện tại",
-        //             style: TextStyle(color: Colors.white),
-        //           )),
-        //
-        //       Tab(
-        //
-        //           child: Text(
-        //             "Vé đã đi",
-        //             style: TextStyle(color: Colors.white),
-        //           )),
-        //       Tab(
-        //
-        //           child: Text(
-        //             "Vé đã huỷ",
-        //             style: TextStyle(color: Colors.white),
-        //           ))
-        //     ],
-        //   ),
-        // ),
         body: Container(
           height: MediaQuery.of(context).size.height,
 
           child:TabBarView(
             children: [
+              vehientai(),
               vedadi(),
               vedahuy(),
-              vehientai(),
+
 
             ],
           ),

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:ticketapp/Home/bottom_nav_bar.dart';
-import 'package:ticketapp/Home/bottomnav.dart';
 import 'package:ticketapp/Home/homePage.dart';
 import 'package:ticketapp/Login/register.dart';
 import 'package:ticketapp/Theme/colors.dart';
@@ -79,7 +78,7 @@ class _LoginState extends State<Login> {
                           BoxShadow(
                             blurRadius: 10,
                             offset: Offset(4, 8),
-                            color: AppColors.shadow,
+                            color: AppColors.shadow.withOpacity(0.2),
                           )
                         ]),
                     child: Form(
@@ -188,9 +187,9 @@ class _LoginState extends State<Login> {
   }
 
   void _dangnhap() {
-    //  if (formKey.currentState!.validate()) {
+      if (formKey.currentState!.validate()) {
     Get.to(BottomNavBar());
-    // }
+     }
   }
 
   void _dangky() {

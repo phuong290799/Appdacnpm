@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ticketapp/Controller/controller.dart';
 import 'package:ticketapp/Home/bottom_nav_bar.dart';
-import 'package:ticketapp/Home/bottomnav.dart';
 import 'package:ticketapp/Home/homePage.dart';
 import 'package:ticketapp/Theme/colors.dart';
 import 'package:ticketapp/Theme/styles.dart';
 
-class Notify extends StatefulWidget {
-  @override
-  _NotifyState createState() => _NotifyState();
-}
-
-class _NotifyState extends State<Notify> {
+class Notify extends StatelessWidget {
+  Controller controllerNotify = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,32 +43,54 @@ class _NotifyState extends State<Notify> {
 
       ),
 
-      body: Container(
-        padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
-        height: MediaQuery.of(context).size.height,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start ,
-                children: [
-                  Row
-                    (
-                    children: [
-                      TextButton(
-                        child: Text(
-                          "Bạn đã mua vé ngày 29/3/2021",style: AppThemes.Text18
-                        ),
-                        onPressed: _thongbao1,
-                      ),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(15),
+        child: Container(
+          padding: const EdgeInsets.all(5),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              color: AppColors.colors_icons,
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.shadow.withOpacity(0.2),
+                  blurRadius: 20,
+                  offset: Offset(4, 10),
+                )
+              ]),
 
+          child: Container(
+            height: MediaQuery.of(context).size.height-190,
+            child: ListView.builder(
+              itemCount: controllerNotify.listTicketed.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: EdgeInsets.symmetric(vertical: 5),
+                  padding: EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: AppColors.colors_icons,
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.shadow.withOpacity(0.2),
+                          blurRadius: 20,
+                          offset: Offset(4, 10),
+                        )
+                      ]),
+                  child: Row(
+                    children: [
+                      Icon(Icons.check_box_outlined),
+                      SizedBox(width: 10,),
+                      Flexible(
+                        child: Text(
+                            "Bạn đã mua vé ngày ${controllerNotify.listTicketed[index].day}",style: AppThemes.Text18
+                        ),
+                      ),
                     ],
                   ),
+                );
+              },
 
-
-                ],
-              ),
-            ],
+            ),
           ),
         ),
       ),

@@ -48,7 +48,7 @@ class _FixAccountState extends State<FixAccount> {
         backgroundColor: AppColors.scaffold,
 
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(15),
         child: Container(
           padding: EdgeInsets.all(20),
@@ -57,13 +57,13 @@ class _FixAccountState extends State<FixAccount> {
                 color: AppColors.colors_icons,
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.shadow,
+                    color: AppColors.shadow.withOpacity(0.2),
                     blurRadius: 20,
                     offset: Offset(4,10),
                   )
                 ]
             ),
-            height: MediaQuery.of(context).size.height,
+
           child: Form(
             key: formKey,
             child: Column(

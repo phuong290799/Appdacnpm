@@ -26,7 +26,7 @@ class HistorySearch extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
             boxShadow: [
               BoxShadow(
-                  color: AppColors.shadow,
+                  color: AppColors.shadow.withOpacity(0.2),
                   blurRadius: 40,
                   offset: Offset(2,10)
               )
@@ -38,7 +38,7 @@ class HistorySearch extends StatelessWidget {
           SizedBox(height: 20,),
           Text("Ngày: $day",style: AppThemes.Text16Medium),
           Divider(
-            color: AppColors.shadow.withOpacity(0.2),
+            color: AppColors.shadow.withOpacity(0.04),
             thickness: 2,
             height: 20,
           ),

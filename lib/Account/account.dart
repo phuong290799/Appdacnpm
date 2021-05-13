@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ticketapp/Account/fixAccount.dart';
+import 'package:ticketapp/Account/gopy.dart';
+import 'package:ticketapp/Account/quanlythe.dart';
 import 'package:ticketapp/Account/setting.dart';
 import 'package:ticketapp/Home/bottom_nav_bar.dart';
-import 'package:ticketapp/Home/bottomnav.dart';
 import 'package:ticketapp/Home/homePage.dart';
 import 'package:ticketapp/Login/login.dart';
 import 'package:ticketapp/Theme/colors.dart';
@@ -69,7 +70,7 @@ class _AccountState extends State<Account> {
                       boxShadow: [
                         BoxShadow(
                           blurRadius: 15,
-                          color: AppColors.shadow,
+                          color: AppColors.shadow.withOpacity(0.2),
                           offset: Offset(4, 8),
                         )
                       ]),
@@ -81,23 +82,24 @@ class _AccountState extends State<Account> {
                         ),
                         Icon(
                           Icons.account_circle,
-                          size: 50,
+                          size: 40,
                           color: AppColors.scaffold,
                         ),
+                        SizedBox(width: 10,),
                         Text("Chào bạn ", style: AppThemes.text30container),
                         Expanded(child: SizedBox()),
                         Container(
-                          height: 60,
-                          width: 60,
+                          height: 50,
+                          width: 50,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(80),
+                              borderRadius: BorderRadius.circular(100),
                               border:
-                                  Border.all(width: 3, color: Colors.black)),
+                                  Border.all(width: 3, color: Colors.white)),
                           child: IconButton(
                             icon: const Icon(
                               Icons.edit_outlined,
-                              size: 40,
-                              color: Colors.black,
+                              size: 30,
+                              color: Colors.lightBlueAccent,
                             ),
                             onPressed: _fix,
                           ),
@@ -126,7 +128,7 @@ class _AccountState extends State<Account> {
                               boxShadow: [
                                 BoxShadow(
                                   blurRadius: 15,
-                                  color: AppColors.shadow,
+                                  color: AppColors.shadow.withOpacity(0.2),
                                   offset: Offset(4, 8),
                                 )
                               ]),
@@ -156,7 +158,7 @@ class _AccountState extends State<Account> {
                               boxShadow: [
                                 BoxShadow(
                                   blurRadius: 15,
-                                  color: AppColors.shadow,
+                                  color: AppColors.shadow.withOpacity(0.2),
                                   offset: Offset(4, 8),
                                 )
                               ]),
@@ -187,7 +189,7 @@ class _AccountState extends State<Account> {
                               boxShadow: [
                                 BoxShadow(
                                   blurRadius: 15,
-                                  color: AppColors.shadow,
+                                  color: AppColors.shadow.withOpacity(0.2),
                                   offset: Offset(4, 8),
                                 )
                               ]),
@@ -217,7 +219,7 @@ class _AccountState extends State<Account> {
                               boxShadow: [
                                 BoxShadow(
                                   blurRadius: 15,
-                                  color: AppColors.shadow,
+                                  color: AppColors.shadow.withOpacity(0.2),
                                   offset: Offset(4, 8),
                                 )
                               ]),
@@ -269,12 +271,17 @@ class _AccountState extends State<Account> {
    // Get.to(() => FixAccount());
   }
 
-  void _quanly() {}
+  void _quanly() {
+    Get.to(()=>Quanlythe());
+  }
   void _thietlap() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Setting(),));
+   // Navigator.push(context, MaterialPageRoute(builder: (context) => Setting(),));
+    Get.to(()=>Setting());
   }
 
-  void _gopy() {}
+  void _gopy() {
+    Get.to(()=>Gopy());
+  }
   void _danhgia() {}
 
   void _signout() {

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:ticketapp/Account/account.dart';
 import 'package:ticketapp/Controller/controller_theme.dart';
 import 'package:ticketapp/Home/bottom_nav_bar.dart';
+import 'package:ticketapp/Home/homePage.dart';
 import 'package:ticketapp/Theme/colors.dart';
 import 'package:ticketapp/Theme/styles.dart';
 
@@ -27,8 +28,9 @@ class _SettingState extends State<Setting> {
           children: [
             InkWell(
               onTap: () {
-               Navigator.push(context, CupertinoPageRoute(
-                 builder: (context) =>Account(),));
+               // Navigator.push(context, CupertinoPageRoute(
+               //   builder: (context) =>Account(),));
+                Get.back();
               },
               child: Container(
                 height: 50,
@@ -61,7 +63,7 @@ class _SettingState extends State<Setting> {
                   color: AppColors.colors_icons,
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.shadow,
+                      color: AppColors.shadow.withOpacity(0.2),
                       blurRadius: 20,
                       offset: Offset(4, 10),
                     )
@@ -101,7 +103,7 @@ class _SettingState extends State<Setting> {
                         color: AppColors.colors_icons,
                         boxShadow: [
                           BoxShadow(
-                            color: AppColors.shadow,
+                            color: AppColors.shadow.withOpacity(0.2),
                             blurRadius: 20,
                             offset: Offset(4, 10),
                           )
@@ -156,7 +158,7 @@ class _SettingState extends State<Setting> {
                                     color: AppColors.colors_icons,
                                     boxShadow: [
                                       BoxShadow(
-                                        color: AppColors.shadow,
+                                        color: AppColors.shadow.withOpacity(0.2),
                                         blurRadius: 20,
                                         offset: Offset(4, 10),
                                       )
@@ -194,7 +196,7 @@ class _SettingState extends State<Setting> {
                   color: AppColors.colors_icons,
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.shadow,
+                      color: AppColors.shadow.withOpacity(0.2),
                       blurRadius: 20,
                       offset: Offset(4, 10),
                     )
@@ -214,6 +216,29 @@ class _SettingState extends State<Setting> {
                     style: AppThemes.Text16,
                   ),
                 ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 50,bottom: 50),
+              child: RaisedButton(
+                onPressed: (){
+                  Get.to(()=>BottomNavBar());
+                },
+                color: AppColors.background,
+                child: Container(
+                  width: 250,
+                  height: 40,
+                  child: Center(
+                    child: Text(
+                      "Lưu",
+                      style: AppThemes.text18container,
+                    ),
+                  ),
+                ),
+                shape: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderSide:
+                    BorderSide(color: AppColors.background, width: 1)),
               ),
             ),
           ],

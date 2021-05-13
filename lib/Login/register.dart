@@ -103,7 +103,7 @@ class _DangkyState extends State<Dangky> {
                         BoxShadow(
                           blurRadius:10,
                           offset: Offset(4, 8),
-                          color: AppColors.shadow,
+                          color: AppColors.shadow.withOpacity(0.2),
                         )
                       ]),
                   child: Form(

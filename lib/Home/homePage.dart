@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:ticketapp/Controller/controller.dart';
 import 'package:ticketapp/Home/historySearch.dart';
 import 'package:ticketapp/Home/ketquaSearch.dart';
+import 'package:ticketapp/Models/searchObj.dart';
 import 'package:ticketapp/Theme/colors.dart';
 import 'package:ticketapp/Theme/styles.dart';
 
@@ -99,7 +100,7 @@ class _HomePageState extends State<HomePage> {
                             color: AppColors.primary,
                             boxShadow: [
                               BoxShadow(
-                                color: AppColors.shadow,
+                                color: AppColors.shadow.withOpacity(0.2),
                                 blurRadius: 20,
                                 offset: Offset(4, 10),
                               )
@@ -245,9 +246,10 @@ class _HomePageState extends State<HomePage> {
                       ),
                       InkWell(
                         onTap: (){
-                          controllerHome.listHistorynoidi.clear();
-                          controllerHome.listHistorynoiden.clear();
-                          controllerHome.listHistoryday.clear();
+                          controllerHome.listHistory.clear();
+                          // controllerHome.listHistorynoidi.clear();
+                          // controllerHome.listHistorynoiden.clear();
+                          // controllerHome.listHistoryday.clear();
                         },
                         child: Text(
                           "Xoá tất cả ", style: TextStyle(
@@ -265,7 +267,7 @@ class _HomePageState extends State<HomePage> {
                       // borderRadius: BorderRadius.circular(0),
                       boxShadow: [
                         BoxShadow(
-                            color: AppColors.shadow,
+                            color: AppColors.shadow.withOpacity(0.2),
                             blurRadius: 10,
                             offset: Offset(2, 10)
                         )
@@ -274,16 +276,16 @@ class _HomePageState extends State<HomePage> {
                   child: Obx(()=>
                      ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: controllerHome.listHistorynoidi.length,
+                      itemCount: controllerHome.listHistory.length,
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.all(5),
                           child: Container(
                               margin: const EdgeInsets.symmetric(horizontal: 0),
                               child: HistorySearch(
-                                noidi:controllerHome.listHistorynoidi[index],
-                                  noiden: controllerHome.listHistorynoiden[index],
-                                  day: controllerHome.listHistoryday[index],
+                                noidi:controllerHome.listHistory[index].noidi,
+                                  noiden: controllerHome.listHistory[index].noiden,
+                                  day: controllerHome.listHistory[index].day,
 
                               )),
                         );
@@ -308,9 +310,7 @@ class _HomePageState extends State<HomePage> {
 
       );
     } else {
-      controllerHome.listHistorynoidi.add(controllerHome.noidi.value);
-      controllerHome.listHistorynoiden.add( controllerHome.noiden.value);
-      controllerHome.listHistoryday.add( controllerHome.day.value);
+      controllerHome.listHistory.add(SearchObj(_noidi.text, _noiden.text, pickday));
       Get.to(() => KetquaSearch(
         noidi:controllerHome.noidi.value,
         noiden: controllerHome.noiden.value,

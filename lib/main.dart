@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ticketapp/Home/bottom_nav_bar.dart';
-import 'package:ticketapp/Home/bottomnav.dart';
+
 import 'package:ticketapp/LocalizationService.dart';
 import 'package:ticketapp/test.dart';
 

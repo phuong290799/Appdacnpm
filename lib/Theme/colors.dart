@@ -19,5 +19,5 @@ class AppColors {
   static const Color scaffold = Color(0xffffffff);
   static const Color colors_container = Color(0xff702DE3);
   static const Color colors_icons = Color(0xffffffff);
-  static Color shadow = Color(0xff000000).withOpacity(0.2);
+  static Color shadow = Color(0xff000000);
 }
