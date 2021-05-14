@@ -213,9 +213,7 @@ class _HomePageState extends State<HomePage> {
                                 child: RaisedButton(
                                   highlightColor: Colors.pinkAccent,
                                   onPressed: (){
-                                    controllerHome.day.value = pickday;
-                                    controllerHome.noidi.value=_noidi.text;
-                                    controllerHome.noiden.value =_noiden.text ;
+
                                     onsearch();
                                   },
                                   child: Text(
@@ -247,9 +245,6 @@ class _HomePageState extends State<HomePage> {
                       InkWell(
                         onTap: (){
                           controllerHome.listHistory.clear();
-                          // controllerHome.listHistorynoidi.clear();
-                          // controllerHome.listHistorynoiden.clear();
-                          // controllerHome.listHistoryday.clear();
                         },
                         child: Text(
                           "Xoá tất cả ", style: TextStyle(
@@ -310,6 +305,9 @@ class _HomePageState extends State<HomePage> {
 
       );
     } else {
+      controllerHome.day.value = pickday;
+      controllerHome.noidi.value=_noidi.text;
+      controllerHome.noiden.value =_noiden.text ;
       controllerHome.listHistory.add(SearchObj(_noidi.text, _noiden.text, pickday));
       Get.to(() => KetquaSearch(
         noidi:controllerHome.noidi.value,

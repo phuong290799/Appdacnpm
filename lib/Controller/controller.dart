@@ -11,7 +11,6 @@ class Controller extends GetxController {
 var noidi = RxString("");
 var noiden = RxString("");
 var day = RxString("");
-
 RxList listHistory = [].obs;
 
 

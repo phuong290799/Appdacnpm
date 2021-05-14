@@ -191,7 +191,7 @@ class MyticketInfor extends StatelessWidget {
                     Row(
                       children: [
                         Icon(
-                          Icons.chair,
+                          Icons.bus_alert,
                           color: AppColors.background,
                           size: 30,
                         ),

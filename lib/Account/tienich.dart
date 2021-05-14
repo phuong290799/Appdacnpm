@@ -67,68 +67,88 @@ class Tienich extends StatelessWidget {
                     SizedBox(
                       height: 20,
                     ),
-                    Column(
+                    Row(
                       children: [
+                        Expanded(child: SizedBox()),
+                        Text("* ",style: TextStyle(fontSize: 22,color: Colors.red),),
                         Text("Dép",style: AppThemes.Text18Medium),
-                        Text("Khi dừng ở các trạm sẽ có dép xuống xe",style: TextStyle(
-                          fontSize: 16,color: AppColors.shadow.withOpacity(0.5),))
+                        Expanded(child: SizedBox()),
                       ],
                     ),
+                    Text("Khi dừng ở các trạm sẽ có dép xuống xe",style: TextStyle(
+                      fontSize: 16,color: AppColors.shadow.withOpacity(0.5),)),
                     SizedBox(
                       height: 20,
                     ),
-                    Column(
+                    Row(
                       children: [
+                        Expanded(child: SizedBox()),
+                        Text("* ",style: TextStyle(fontSize: 22,color: Colors.red),),
                         Text("Gửi kèm xe máy",style: AppThemes.Text18Medium),
-                        Text("Nhà xe cho khách gửi kèm xe máy ( +50% giá vé)",
-                            textAlign: TextAlign.center,style: TextStyle(
-                          fontSize: 16,color: AppColors.shadow.withOpacity(0.5),))
+                        Expanded(child: SizedBox()),
                       ],
                     ),
+
+                    Text("Nhà xe cho khách gửi kèm xe máy ( +50% giá vé)",
+                        textAlign: TextAlign.center,style: TextStyle(
+                      fontSize: 16,color: AppColors.shadow.withOpacity(0.5),)),
                     SizedBox(
                       height: 20,
                     ),
-                    Column(
+
+                    Row(
                       children: [
+                        Expanded(child: SizedBox()),
+                        Text("* ",style: TextStyle(fontSize: 22,color: Colors.red),),
                         Text("Khẩu trang",style: AppThemes.Text18Medium),
-                        Text("Có khẩu trang hỗ trợ hàh khách",
-                            textAlign: TextAlign.center,style: TextStyle(
-                          fontSize: 16,color: AppColors.shadow.withOpacity(0.5),))
+                        Expanded(child: SizedBox()),
                       ],
                     ),
+                    Text("Có khẩu trang hỗ trợ hàh khách",
+                        textAlign: TextAlign.center,style: TextStyle(
+                      fontSize: 16,color: AppColors.shadow.withOpacity(0.5),)),
                     SizedBox(
                       height: 20,
                     ),
-                    Column(
+                    Row(
                       children: [
+                        Expanded(child: SizedBox()),
+                        Text("* ",style: TextStyle(fontSize: 22,color: Colors.red),),
                         Text("Nước uống",style: AppThemes.Text18Medium),
-                        Text("Hỗ trợ nước suối",style: TextStyle(
-                          fontSize: 16,color: AppColors.shadow.withOpacity(0.5),))
+                        Expanded(child: SizedBox()),
                       ],
                     ),
+                    Text("Hỗ trợ nước suối",style: TextStyle(
+                      fontSize: 16,color: AppColors.shadow.withOpacity(0.5),)),
                     SizedBox(
                       height: 20,
                     ),
-                    Column(
+                    Row(
                       children: [
+                        Expanded(child: SizedBox()),
+                        Text("* ",style: TextStyle(fontSize: 22,color: Colors.red),),
                         Text("Gối, chăn",style: AppThemes.Text18Medium),
-                        Text("Có sẵn trên chỗ ngồi của hành khách",
-                            textAlign: TextAlign.center,style: TextStyle(
-                          fontSize: 16,color: AppColors.shadow.withOpacity(0.5),))
+                        Expanded(child: SizedBox()),
                       ],
                     ),
+                    Text("Có sẵn trên chỗ ngồi của hành khách",
+                        textAlign: TextAlign.center,style: TextStyle(
+                      fontSize: 16,color: AppColors.shadow.withOpacity(0.5),)),
                     SizedBox(
                       height: 20,
                     ),
-                    Column(
+                    Row(
                       children: [
+                        Expanded(child: SizedBox()),
+                        Text("* ",style: TextStyle(fontSize: 22,color: Colors.red),),
                         Text("Búa phá kính",style: AppThemes.Text18Medium),
-                        Text("Dùng trong trường hợp khẩn cấp, được trang bị gốc phải cửa sổ",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                          fontSize: 16,color: AppColors.shadow.withOpacity(0.5),))
+                        Expanded(child: SizedBox()),
                       ],
                     ),
+                    Text("Dùng trong trường hợp khẩn cấp, được trang bị gốc phải cửa sổ",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                      fontSize: 16,color: AppColors.shadow.withOpacity(0.5),)),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(30, 50, 30, 30),
                       child: RaisedButton(

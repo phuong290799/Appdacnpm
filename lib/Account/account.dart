@@ -135,7 +135,7 @@ class _AccountState extends State<Account> {
                           child: Row(
                             children: [
                               Icon(
-                                Icons.manage_accounts,
+                                Icons.supervisor_account_outlined,
                                 size: 30,
                                 color: AppColors.background,
                               ),

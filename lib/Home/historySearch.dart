@@ -7,7 +7,6 @@ import 'package:ticketapp/Theme/styles.dart';
 class HistorySearch extends StatelessWidget {
   String noidi,noiden,day;
   HistorySearch({required this.noidi,required this.noiden,required this.day});
-  Controller controllerHistory =Get.find();
   @override
   Widget build(BuildContext context) {
 
