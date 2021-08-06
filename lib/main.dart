@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ticketapp/Home/bottom_nav_bar.dart';
+import 'file:///E:/flutter2/ticketapp/lib/screen/Home/bottom_nav_bar.dart';
 
 import 'package:ticketapp/LocalizationService.dart';
+import 'package:ticketapp/screen/splash.dart';
 import 'package:ticketapp/test.dart';
 
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       // locale: LocalizationService.locale,
       // fallbackLocale: LocalizationService.fallbackLocale,
       // translations: LocalizationService(),
-      home: BottomNavBar(),
+      home: Splash(),
     );
   }
 }
