@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'file:///E:/flutter2/ticketapp/lib/screen/Home/bottom_nav_bar.dart';
+import 'package:flutter/services.dart';
 
 import 'package:ticketapp/LocalizationService.dart';
-import 'package:ticketapp/screen/splash.dart';
+import 'package:ticketapp/Login/login.dart';
 import 'package:ticketapp/test.dart';
 
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();//ervicesBinding.defaultBinaryMessenger was accessed before the binding was initialized.
+  SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent,statusBarIconBrightness: Brightness.light));
   runApp(MyApp());
 }
 
@@ -16,12 +19,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
      // home:bottomNav(),
       // locale: LocalizationService.locale,
       // fallbackLocale: LocalizationService.fallbackLocale,
       // translations: LocalizationService(),
-      home: Splash(),
+      home: Login(),
     );
   }
 }
