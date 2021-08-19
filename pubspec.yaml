@@ -24,10 +24,13 @@ dependencies:
   shared_preferences: ^2.0.6
   intl: ^0.17.0
   get: ^4.1.4
+  stripe_payment: ^1.0.7
+
   flutter:
     sdk: flutter
   http: ^0.13.3
   flutter_svg: ^0.15.0
+  currency_text_input_formatter: ^2.1.2
 
 
 

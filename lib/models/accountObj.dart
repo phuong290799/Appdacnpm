@@ -2,6 +2,7 @@ class AccountObj {
   late int maNd;
   late String tenNd;
   late String sdt;
+  late String imageUrl;
   late String cmnd;
   late String diaChi;
   late String ngaySinh;
@@ -23,6 +24,7 @@ class AccountObj {
      diaChi = json['diaChi']??"";
      ngaySinh = json['ngaySinh']??"";
      vaitro = json['vaitro']??0;
+    imageUrl = json['imageUrl'];
   }
 
   Map<String, dynamic> toJson() {

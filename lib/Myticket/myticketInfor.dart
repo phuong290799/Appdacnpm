@@ -90,8 +90,8 @@ MyTicketController myTicketController=Get.put(MyTicketController());
                         SizedBox(
                           width: 20,
                         ),
-                        Text(controllerMtI.accountObj.tenNd,
-                            style: AppThemes.Text18),
+                        /*Text(controllerMtI.accountObj.tenNd,
+                            style: AppThemes.Text18),*/
                       ],
                     ),
                     SizedBox(
@@ -107,8 +107,8 @@ MyTicketController myTicketController=Get.put(MyTicketController());
                         SizedBox(
                           width: 20,
                         ),
-                        Text("(VN)+84: ${controllerMtI.accountObj.sdt}",
-                            style: AppThemes.Text18),
+                      /*  Text("(VN)+84: ${controllerMtI.accountObj.sdt}",
+                            style: AppThemes.Text18),*/
                       ],
                     ),
                     SizedBox(
@@ -268,8 +268,8 @@ MyTicketController myTicketController=Get.put(MyTicketController());
                         SizedBox(
                           width: 20,
                         ),
-                        Text(controllerMtI.accountObj.tenNd,
-                            style: AppThemes.Text18),
+                        /*Text(controllerMtI.accountObj.tenNd,
+                            style: AppThemes.Text18),*/
                       ],
                     ),
                     SizedBox(
@@ -285,8 +285,8 @@ MyTicketController myTicketController=Get.put(MyTicketController());
                         SizedBox(
                           width: 20,
                         ),
-                        Text("(VN)+84: ${controllerMtI.accountObj.sdt}",
-                            style: AppThemes.Text18),
+                        /*Text("(VN)+84: ${controllerMtI.accountObj.sdt}",
+                            style: AppThemes.Text18),*/
                       ],
                     ),
                     SizedBox(

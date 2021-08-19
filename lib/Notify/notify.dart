@@ -21,13 +21,13 @@ class Notify extends StatelessWidget {
             child: Align(child: Text("Thông báo", style: AppThemes.text25container),
             alignment: Alignment.bottomCenter,),
           ),
-          buildExpanded( context),
+          //buildExpanded( context),
         ],
       ),
     );
   }
 
-  Expanded buildExpanded(BuildContext context) => Expanded(child: Container(
+ /* Expanded buildExpanded(BuildContext context) => Expanded(child: Container(
     child: controllerNotify.listTicketed.length==0?ListView.builder(
       itemCount: controllerNotify.listTicketed.length,
       itemBuilder: (context, index) {
@@ -62,7 +62,7 @@ class Notify extends StatelessWidget {
       Icon(Icons.notifications, size: 30,color: Colors.lightBlueAccent,),
       Text("Bạn chưa có thông báo nào")
     ],),),
-  ));
+  ));*/
   void _thongbao1(){
 
 

@@ -71,17 +71,17 @@ class _FixAccountState extends State<FixAccount> {
             child: Column(
               children: [
                 TextFormField(
-                  controller: controllerfix.name,
+                 // controller: controllerfix.name,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      controllerfix.accountObj.tenNd=value;
+                     // controllerfix.accountObj.tenNd=value;
                     } else {
                       name=value;
                     }
                   },
                   style: AppThemes.Text14,
                   decoration: InputDecoration(
-                    labelText:  "Họ tên: ${controllerfix.accountObj.tenNd}",
+                   // labelText:  "Họ tên: ${controllerfix.accountObj.tenNd}",
                     prefixIcon: Icon(Icons.person_add_alt_1_outlined),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -94,17 +94,17 @@ class _FixAccountState extends State<FixAccount> {
                   height: 20,
                 ),
                 TextFormField(
-                  controller: controllerfix.sdt,
+                  //controller: controllerfix.sdt,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      controllerfix.accountObj.sdt=value;
+                    //  controllerfix.accountObj.sdt=value;
                     } else {
                       phone = value;
                     }
                   },
                   style: AppThemes.Text14,
                   decoration: InputDecoration(
-                    labelText: "SDT: ${controllerfix.accountObj.sdt}",
+                  //  labelText: "SDT: ${controllerfix.accountObj.sdt}",
                     prefixIcon: Icon(Icons.phone),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -117,17 +117,17 @@ class _FixAccountState extends State<FixAccount> {
                   height: 20,
                 ),
                 TextFormField(
-                  controller: controllerfix.diachi,
+                 // controller: controllerfix.diachi,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      controllerfix.accountObj.diaChi=value;
+                   //   controllerfix.accountObj.diaChi=value;
                     } else {
                     address = value;
                     }
                   },
                   style: AppThemes.Text14,
                   decoration: InputDecoration(
-                    labelText:"Địa chỉ: ${  controllerfix.accountObj.diaChi}",
+                   // labelText:"Địa chỉ: ${  controllerfix.accountObj.diaChi}",
                     prefixIcon: Icon(Icons.location_on_outlined),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -140,11 +140,11 @@ class _FixAccountState extends State<FixAccount> {
                   height: 20,
                 ),
                 TextFormField(
-                  controller: controllerfix.cmnd,
+                 // controller: controllerfix.cmnd,
                   obscureText: true,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      controllerfix.accountObj.cmnd=value;
+                   //   controllerfix.accountObj.cmnd=value;
                     } else {
                       cmnd = value;
                     }
@@ -152,7 +152,7 @@ class _FixAccountState extends State<FixAccount> {
                   style: AppThemes.Text14,
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.credit_card_sharp),
-                    labelText: "(CMND): ${ controllerfix.accountObj.cmnd}",
+                  //  labelText: "(CMND): ${ controllerfix.accountObj.cmnd}",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                       borderSide:
@@ -199,6 +199,6 @@ class _FixAccountState extends State<FixAccount> {
 
     print("hhi");
 
-    controllerfix.apiUpdateInfo();
+    //controllerfix.apiUpdateInfo();
   }
 }

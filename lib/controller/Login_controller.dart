@@ -16,6 +16,7 @@ class LoginController extends GetxController {
   late final TextEditingController emaildkController;
   late final TextEditingController passwordController;
   late final TextEditingController passworddkController;
+  late final TextEditingController passwordConfirmController;
   late AccountObj accountObj;
   @override
   void onInit() {
@@ -24,6 +25,7 @@ class LoginController extends GetxController {
     emaildkController = TextEditingController();
     passwordController = TextEditingController();
     passworddkController = TextEditingController();
+    passwordConfirmController = TextEditingController();
     super.onInit();
   }
   @override
@@ -53,7 +55,35 @@ class LoginController extends GetxController {
       }
       else{
         Get.back();
-        Get.snackbar("Error", "Tài khoản đã tồn tại");
+        Timer timer = Timer(Duration(milliseconds: 1000), (){
+          Get.back();
+        });
+        Get.dialog(
+            AlertDialog(
+
+                content: Container(
+                  height: 80,
+                  //color: Colors.red,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text("Thông báo",style:TextStyle(color: Colors.red, fontSize: 25, fontWeight: FontWeight.bold)),
+                      SizedBox(height: 10),
+                      Container(
+                        height: 1,
+                        color: Color(0xffcecece),
+                      ),
+                      SizedBox(height: 20)
+                      ,                    Text("Tài khoản đã tồn tại",style:TextStyle(color:Color(0xff777777), fontSize: 20,))
+                    ],
+                  ),
+                )
+            )
+        ).then((value){
+          if (timer.isActive) {
+            timer.cancel();
+          }
+        });
       }
     }
     ).catchError((e){

@@ -135,14 +135,9 @@ class _LoginState extends State<Login> {
                                   fontWeight: FontWeight.bold)),
                         ),
                         onTap: () {
-
-                          if (formKey.currentState!.validate()) {
-                            loginController.apiLogin();
-                            FocusScope.of(context).unfocus();
-                          }
-
-
-
+                          ///Get.off(()=>BottomNavBar());
+                          loginController.apiLogin();
+                          FocusScope.of(context).unfocus();
                         },
                       ),
                     ),
@@ -151,11 +146,11 @@ class _LoginState extends State<Login> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                        Text("Bạn muốn đổi mật khẩu?", style: TextStyle(color: Colors.black,fontSize: 15)),
+                        Text("Bạn chưa có tài khoản?", style: TextStyle(color: Colors.black,fontSize: 15)),
                           SizedBox(width: 5),
-                          InkWell(child: Text("Đổi mật khẩu",style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold,fontSize: 15)),
+                          InkWell(child: Text("Đăng ký",style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold,fontSize: 15)),
                           onTap: (){
-
+                            Get.to(Dangky());
                           },)
                       ],),
                     ),

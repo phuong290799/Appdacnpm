@@ -1,16 +1,16 @@
-class TicketObj {
- late int maChuyenXe;
- late String tenBxDi;
- late String diaChiBxDi;
- late String tenBxDen;
- late String diaChiBxDen;
- late String tenNhaXe;
- late int soChoNgoi;
- late String gioXuatBen;
- late int thoiGianDiChuyen;
- late double donGia;
+class BusPlace {
+  late int maChuyenXe;
+  late String tenBxDi;
+  late String diaChiBxDi;
+  late String tenBxDen;
+  late String diaChiBxDen;
+  late String tenNhaXe;
+  late int soChoNgoi;
+  late List<String> ngayXuatBen;
+  late int thoiGianDiChuyen;
+  late double donGia;
 
-  TicketObj(
+  BusPlace(
       {required this.maChuyenXe,
         required this.tenBxDi,
         required this.diaChiBxDi,
@@ -18,11 +18,11 @@ class TicketObj {
         required this.diaChiBxDen,
         required this.tenNhaXe,
         required this.soChoNgoi,
-        required this.gioXuatBen,
+        required this.ngayXuatBen,
         required this.thoiGianDiChuyen,
         required this.donGia});
 
-  TicketObj.fromJson(Map<String, dynamic> json) {
+  BusPlace.fromJson(Map<String, dynamic> json) {
     maChuyenXe = json['maChuyenXe'];
     tenBxDi = json['tenBxDi'];
     diaChiBxDi = json['diaChiBxDi'];
@@ -30,7 +30,7 @@ class TicketObj {
     diaChiBxDen = json['diaChiBxDen'];
     tenNhaXe = json['tenNhaXe'];
     soChoNgoi = json['soChoNgoi'];
-    gioXuatBen = json['gioXuatBen'];
+    ngayXuatBen = json['ngayXuatBen'].cast<String>();
     thoiGianDiChuyen = json['thoiGianDiChuyen'];
     donGia = json['donGia'];
   }
@@ -44,7 +44,7 @@ class TicketObj {
     data['diaChiBxDen'] = this.diaChiBxDen;
     data['tenNhaXe'] = this.tenNhaXe;
     data['soChoNgoi'] = this.soChoNgoi;
-    data['gioXuatBen'] = this.gioXuatBen;
+    data['ngayXuatBen'] = this.ngayXuatBen;
     data['thoiGianDiChuyen'] = this.thoiGianDiChuyen;
     data['donGia'] = this.donGia;
     return data;

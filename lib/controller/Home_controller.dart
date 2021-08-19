@@ -18,14 +18,16 @@ class HomeController extends GetxController {
   final TextEditingController noiden = TextEditingController();
   var listHistory = <SearchObj>[].obs;
   LoginController loginController = Get.find();
+   String tpDi="";
+   String tpDen="";
 
   List<TicketObj> listsearch = [];
   @override
   void onInit() {
     gethistory();
     // TODO: implement onInit
-    noidi.text="Hà Nội";
-    noiden.text="Đà Nẵng";
+    noidi.text = "Hà Nội";
+    noiden.text = "Đà Nẵng";
     super.onInit();
   }
 
@@ -76,9 +78,9 @@ class HomeController extends GetxController {
                   ngayDi: day.value);
               addHistory(obj);
               Get.to(() => KetquaSearch(
-                    noidi: getTenBx(s, noidi.text.toUpperCase()),
-                    noiden: getTenBx(s, noiden.text.toUpperCase()),
-                    day: day.value,
+                noidi: tpDi==""?"Hà Nội":tenTP(tpDi),
+                noiden: tpDen==""?"Đà nẵng":tenTP(tpDen),
+                day: day.value,
                   ));
             } else
               print("size null");
@@ -86,17 +88,17 @@ class HomeController extends GetxController {
         } else {
           Get.back();
           Get.to(() => KetquaSearch(
-                noidi: getTenBx(s, noidi.text),
-                noiden: getTenBx(s, noiden.text),
+            noidi: tpDi==""?"Hà Nội":tenTP(tpDi),
+            noiden: tpDen==""?"Đà nẵng":tenTP(tpDen),
                 day: day.value,
               ));
         }
       } else {
         Get.back();
         Get.to(() => KetquaSearch(
-              noidi: getTenBx(s, noidi.text),
-              noiden: getTenBx(s, noiden.text),
-              day: day.value,
+          noidi: tpDi==""?"Hà Nội":tenTP(tpDi),
+          noiden: tpDen==""?"Đà nẵng":tenTP(tpDen),
+          day: day.value,
             ));
       }
     }
@@ -109,6 +111,37 @@ class HomeController extends GetxController {
       }
     }
     return 0;
+  }
+
+  String tenTP(String diaChiBenXe) {
+    String tp="";
+    if(diaChiBenXe.contains("Thừa Thiên Huế")){
+      tp = diaChiBenXe.substring(diaChiBenXe.length-4, diaChiBenXe.length);
+      print(tp);
+      return tp;
+    }
+    if(diaChiBenXe.contains("Hồ Chí Minh"))
+      {
+        tp="TP.HCM";
+        return tp;
+      }
+    else{
+
+      int n=0;
+      for (int i = diaChiBenXe.length-1; i >0; i--) {
+        if (diaChiBenXe[i] == " ") {
+          n++;
+          if(n==2){
+            tp = diaChiBenXe.substring(i+1, diaChiBenXe.length);
+            print(tp);
+            break;
+          }
+        }
+      }
+      return tp;
+    }
+
+
   }
 
   String getTenBx(List<BusStation> bus, String s) {

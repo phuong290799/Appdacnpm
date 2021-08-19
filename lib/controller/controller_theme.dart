@@ -8,7 +8,7 @@ class ControllerTheme extends GetxController{
     ColorsObj("Màu hồng", Colors.pinkAccent),
     ColorsObj("Màu xanh lục", Colors.green),
     ColorsObj("Màu vàng", Colors.yellow),
-    ColorsObj("Màu xanh dương", Colors.blue),
+    ColorsObj("Màu xanh dương", Colors.blueAccent),
     ColorsObj("Mặc định",  Color(0xff706EEE))];
 
 }

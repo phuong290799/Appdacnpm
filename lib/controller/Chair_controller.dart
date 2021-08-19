@@ -1,215 +1,103 @@
+
+
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:ticketapp/Controller/Home_controller.dart';
-import 'package:ticketapp/Controller/Login_controller.dart';
-import 'package:ticketapp/Models/SeatInfor.dart';
-import 'package:ticketapp/Models/accountObj.dart';
-import 'package:ticketapp/Models/chairObj.dart';
-import 'package:ticketapp/Models/seats.dart';
-import 'package:ticketapp/Models/ticketInforObj.dart';
-import 'package:ticketapp/Notify/notify.dart';
+import 'package:stripe_payment/stripe_payment.dart';
+
+import 'package:ticketapp/Models/ticketObj.dart';
 import 'package:ticketapp/http/request.dart';
 
 class ChairController extends GetxController{
-  HomeController homeController=Get.find();
-  LoginController loginController=Get.find();
-  late TextEditingController name;
-  late TextEditingController sdt;
-  late TextEditingController diachi;
-  late TextEditingController cmnd;
+  /*late TicketObj obj;
+  late String Time;
+*/
+  late TextEditingController amount;
+  late TextEditingController Name;
+  late TextEditingController Note;
+  late TextEditingController cardNumberController ;
 
-  var maCX;
-  late AccountObj accountObj=loginController.accountObj;
-  List<TicketInforObj> listTicketed = [];
-  List<SeatInfor> listSelected = [];
-  var listSeat=<Seats>[].obs;
-  List<ChairObj> listChair = [
-    ChairObj(
-      01,
-      "A1",
-      true,
-      Colors.white,
-    ),
-    ChairObj(
-      02,
-      "A2",
-      false,
-      Colors.white,
-    ),
-    ChairObj(03, "A3", false, Colors.white),
-    ChairObj(04, "B1", false, Colors.white),
-    ChairObj(05, "B2", false, Colors.white),
-    ChairObj(06, "B3", false, Colors.white),
-    ChairObj(07, "A4", false, Colors.white),
-    ChairObj(08, "A5", false, Colors.white),
-    ChairObj(09, "A6", true, Colors.white),
-    ChairObj(10, "B4", true, Colors.white),
-    ChairObj(11, "B5", false, Colors.white),
-    ChairObj(12, "B6", false, Colors.white),
-    ChairObj(13, "A7", true, Colors.white),
-    ChairObj(14, "A8", false, Colors.white),
-    ChairObj(15, "A9", false, Colors.white),
-    ChairObj(16, "B7", false, Colors.white),
-    ChairObj(17, "B8", false, Colors.white),
-    ChairObj(18, "B9", false, Colors.white),
-    ChairObj(19, "A10", false, Colors.white),
-    ChairObj(20, "A11", false, Colors.white),
-    ChairObj(21, "A12", false, Colors.white),
-    ChairObj(22, "B10", false, Colors.white),
-    ChairObj(23, "B11", false, Colors.white),
-    ChairObj(24, "B12", false, Colors.white),
-    ChairObj(25, "A13", false, Colors.white),
-    ChairObj(26, "A14", false, Colors.white),
-    ChairObj(27, "A15", false, Colors.white),
-    ChairObj(28, "B13", false, Colors.white),
-    ChairObj(29, "B14", false, Colors.white),
-    ChairObj(30, "B15", false, Colors.white),
-    ChairObj(31, "A16", false, Colors.white),
-    ChairObj(32, "A17", false, Colors.white),
-    ChairObj(33, "A18", false, Colors.white),
-    ChairObj(34, "B16", false, Colors.white),
-    ChairObj(35, "B17", false, Colors.white),
-    ChairObj(36, "B18", false, Colors.white),
-  ];
-  // @override
-  // void onInit() {
-  //   // TODO: implement onInit
-  //   apiGetChair();
-  //   super.onInit();
-  // }
+  late TextEditingController expDateController;
+  late TextEditingController cVCController ;
+  //late TextEditingController Note;
+
+  var ListSeat=<int>[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1].obs;
+  var statusLoad=false.obs;
+  var ListSeatBook=<int>[].obs;
+
   @override
   void onInit() {
-    sdt=TextEditingController();
-    name=TextEditingController();
-    diachi=TextEditingController();
-    cmnd=TextEditingController();
-    sdt.text=loginController.accountObj.sdt;
-    name.text=loginController.accountObj.tenNd;
-    cmnd.text=loginController.accountObj.cmnd;
-    diachi.text=loginController.accountObj.diaChi;
-
-apiGetInfo();
     // TODO: implement onInit
     super.onInit();
+
+
+    amount=TextEditingController();
+    Note=TextEditingController();
+    Name=TextEditingController();
+   cardNumberController=TextEditingController();
+   expDateController=TextEditingController();
+   cVCController=TextEditingController();
+    amount.text="0";
+    Name.text="NGUYEN BA THANH";
+    cardNumberController.text="4242424242424242";
+    expDateController.text="04/25";
+    cVCController.text="123";
+    StripePayment.setOptions(
+        StripeOptions(publishableKey: "pk_test_51JPl1NHZ9JYY3XSIHkMBfRAIuRMPMXGCA1kPs6J1zFqMybHngx4jeRDmd11KZaVOcq2iXWBqUmpRDiv6IE06b8ij00vcCvWwrs", merchantId: "Test", androidPayMode: 'test')
+    );
+    print("2");
+  }
+  void apiBookTicket() async{
+
   }
 
-  void apiGetInfo()async{
-    var headers = {"Content-type": "application/json"};
-    //SharedPreferences prefs= await SharedPreferences.getInstance();
-    //int VaiTro=prefs.getInt("VaiTro")??0;
-     int VaiTro=3;
-    print("Vai tro ${VaiTro}");
-    String url=VaiTro==3?"https://qlbvxk.herokuapp.com/api/customers/${loginController.accountObj.maNd}":"https://qlbvxk.herokuapp.com/api/staffs/${loginController.accountObj.maNd}";
-    Request request = Request(
-        Url: url,
-        body: jsonEncode({
-          "TenNd" : name.text,
-          "Sdt" : sdt.text,
-          "Cmnd" : cmnd.text,
-          "DiaChi" : diachi.text,
-          "NgaySinh" : "1999-11-11"
-        }),
-        header: headers);
-    request.get().then((value){
-      if(value.statusCode==200){
-        var info=json.decode(value.body);
-        print(info);
-        loginController.accountObj=AccountObj.fromJson(info);
-
-      }
-
-    }).catchError((onError){
-      print("Loii ${onError.toString()}");
+  void payViaNewCard() async {
+    final CreditCard card=CreditCard(
+      name: this.Name.text,
+      number: this.cardNumberController.text,
+      expMonth:04, //int.parse(this.expDateController.text.substring(0,2)),
+      expYear: 25,//int.parse(this.expDateController.text.substring(3,5)),
+      cvc: this.cVCController.text
+    );
+    StripePayment.createTokenWithCard(card).then((token){
+      print(token.tokenId);
     });
+  /*Token token=await StripePayment.createTokenWithCard(card);
+  print(token.tokenId);*/
+
   }
 
-
-  void apiUpdateInfo() async{
-
-    var headers = {"Content-type": "application/json"};
-    SharedPreferences prefs= await SharedPreferences.getInstance();
-    int VaiTro=prefs.getInt("VaiTro")??0;
-    String url=VaiTro==3?"https://qlbvxk.herokuapp.com/api/customers/${loginController.accountObj.maNd}":"https://qlbvxk.herokuapp.com/api/staffs/${loginController.accountObj.maNd}";
-    Request request = Request(
-        Url:url,
-        body: jsonEncode({
-          "TenNd" : name.text,
-          "Sdt" : sdt.text,
-          "Cmnd" : cmnd.text,
-          "DiaChi" : diachi.text,
-          "NgaySinh" : "1999-11-11"
-        }),
-        header: headers);
-    request.put().then((value){
-      if(value.statusCode==204){
-        print(value.statusCode);
-        print("thanh cong");
-        print(value.statusCode);
-        print("thanh cong");
-        apiGetInfo();
-
-      }
-
-    }).catchError((onError){
-      print("Loi ${onError.toString()}");
-    });
-  }
-
-
-  @override
-  void apiBookTicket( String s) async{
-    Get.dialog(Center(child: CircularProgressIndicator()),barrierDismissible: false);
+  void apiGetListSeatEmpty(TicketObj obj, String Time) async{
     var headers = {"Content-type": "application/json"};
     Request request = Request(
-        Url: "https://qlbvxk.herokuapp.com/api/tickets/",
-        body: jsonEncode({
-          "MaKh" : loginController.accountObj.maNd,
-          "MaChoNgoi" : [s],
-          "MaChuyenXe" : homeController.maCx,
-          "GhiChu": "Go"
-        }),
+       // Url: "http://qlbvxk.herokuapp.com/api/tickets/seats?bustripid=1&date=2021-08-17T15:00:00",
+        Url: "http://qlbvxk.herokuapp.com/api/tickets/seats?bustripid=${obj.maChuyenXe}&date=${Time.substring(6,10)}-${Time.substring(3,5)}-${Time.substring(0,2)}T${obj.gioXuatBen}",
         header: headers);
-    request.post().then((value){
-      if(value.statusCode==200){
-        print(value.statusCode);
-        Get.back();
-        Get.offAll(()=>Notify());
-      }
-
-    }).catchError((onError){
-      print("Loi ${onError.toString()}");
-    });
     print(request.Url);
-    print("[$s]");
-    print("[${homeController.maCx}]");
-    print("[${loginController.accountObj.maNd}]");
-  }
-
-  void apiGetChair(mabx) async{
-    print("load");
-    var headers = {"Content-type": "application/json"};
-    Request request = Request(
-        Url: "https://qlbvxk.herokuapp.com/api/seats/search?bustripid=${mabx}",
-        body: jsonEncode({"Email": "i", "MatKhau": "i"}),
-        header: headers);
+    //print(ListSeat.length);
     request.get().then((value){
-      print(request.Url);
-      var responsedata=jsonDecode(value.body) as List;
-      listSeat.value=[];
-      listSeat.value=responsedata.map((e){
-        return Seats.fromJson(e);
-      }).toList();
-      print(listSeat.length);
+      List<dynamic> a=json.decode(value.body);
+      //print(a[2]);
+      if(value.statusCode==200){
+        for(int i=0; i<ListSeat.length; i++){
+          for(int j=0; j<a.length; j++){
+            //print("A=${int.parse(a[j].toString())}");
+            if(i+1==int.parse(a[j].toString())){
+              ListSeat[i]=2;
+              print(ListSeat[i]);
 
-      for(int i=0; i<listSeat.length; i++){
-        listChair[i].id=listSeat[i].maChoNgoi;
-        listChair[i].tinhtrang=listSeat[i].tinhTrangChoNgoi;
+            }
+          }
+        }
+        statusLoad.value=true;
       }
-    }).catchError((onError){
-      print("Loi chair: ${onError.toString()}");
+
+    }).catchError((e){
+      print("ChairController Loi:${e.toString()}");
     });
   }
+
 }
