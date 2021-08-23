@@ -25,7 +25,8 @@ dependencies:
   intl: ^0.17.0
   get: ^4.1.4
   stripe_payment: ^1.0.7
-
+  pattern_formatter: ^2.0.0
+  flutter_multi_formatter: ^2.3.3
   flutter:
     sdk: flutter
   http: ^0.13.3

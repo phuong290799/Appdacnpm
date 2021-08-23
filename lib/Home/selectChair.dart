@@ -25,7 +25,8 @@ class SelectChair extends GetView<ChairController> {
     controllerChair.Time=this.day;*/
    /* controllerChair.Time=day;
     controllerChair.obj=obj;*/
-    controllerChair.apiGetListSeatEmpty(obj, day);
+    print("render");
+    //controllerChair.apiGetListSeatEmpty(obj, day);
     return Scaffold(
       body: Column(
         children: <Widget>[
@@ -173,13 +174,13 @@ class SelectChair extends GetView<ChairController> {
                             return InkWell(child: buildSeat(stt,index+18),
                               onTap: (){
                                 if(controllerChair.ListSeat[index+18]==1){
-                                  controllerChair.ListSeatBook.add(index);
+                                  controllerChair.ListSeatBook.add(index+18);
                                   controllerChair.ListSeat[index+18]=3;
                                 }
                                 else
                                 if(controllerChair.ListSeat[index+18]==3)
                                 {
-                                  controllerChair.ListSeatBook.remove(index);
+                                  controllerChair.ListSeatBook.remove(index+18);
                                   controllerChair.ListSeat[index+18]=1;
                                 }
                               },);
@@ -230,7 +231,8 @@ class SelectChair extends GetView<ChairController> {
                   });
                 }
                 else{
-                  Get.to(()=>BookSeat(obj));
+                  Get.to(()=>BookSeat(obj,controllerChair.ListSeatBook,day
+                  ));
                 }
 
               },)
@@ -245,7 +247,7 @@ class SelectChair extends GetView<ChairController> {
     return Container(
         height: 20,
         width: 20,
-        child:sst>=0?Center(child: Text("${sst}",style: TextStyle(fontWeight: FontWeight.bold),)):Container(),
+        child:sst>=0?Center(child: Text("${sst}",style: TextStyle(fontWeight: FontWeight.w900,color: MaMau==2?Colors.white:Colors.black),)):Container(),
         decoration: BoxDecoration(
             border: Border.all(color: Colors.grey, width: 1),
             color: MaMau == 1

@@ -106,6 +106,7 @@ class LoginController extends GetxController {
       if(accountObj.maNd>0){
         SharedPreferences prefs= await SharedPreferences.getInstance();
         prefs.setInt("VaiTro", accountObj.vaitro);
+        prefs.setInt("MaND", accountObj.maNd);
         this.accountObj=accountObj;
         print("Ma ${this.accountObj.maNd}");
         print("Ten ${this.accountObj.tenNd}");

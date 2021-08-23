@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ticketapp/Controller/Chair_controller.dart';
 import 'package:ticketapp/Controller/Home_controller.dart';
 import 'package:ticketapp/Home/selectChair.dart';
@@ -82,8 +83,10 @@ class KetquaSearch extends StatelessWidget {
                       child: buildColumnTicket(obj),
 
                     )),
-                onTap: (){
+                onTap: ()async{
 
+                  SharedPreferences prefs= await SharedPreferences.getInstance();
+                  prefs.setString("ListSeat","http://qlbvxk.herokuapp.com/api/tickets/seats?bustripid=${obj.maChuyenXe}&date=${day.substring(6,10)}-${day.substring(3,5)}-${day.substring(0,2)}T${obj.gioXuatBen}");
                   Get.to(()=> SelectChair(obj, day));
 
                 });

@@ -29,34 +29,24 @@ class vehientai extends StatelessWidget {
                 MyTicket myTicket=myTicketController.list(1)[index];
                 return InkWell(
                   onTap: (){
-                    Get.to(()=>MyticketInfor(myticket: myTicket,sst: 1,));
+                    Get.to(()=>MyticketInfor(myTicket,1));
                     // print(controllervht.listTicketed[index].listcho);
                   },
                   child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
-                    padding: EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: AppColors.colors_icons,
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppColors.shadow.withOpacity(0.2),
-                            blurRadius: 20,
-                            offset: Offset(4, 10),
-                          )
-                        ]),
-                    child: Row(
-                      children: [
-                        Icon(Icons.check_circle_outline),
-                        SizedBox(width: 10,),
-                        Flexible(
-                          child: Text(
-                              "${myTicketController.ListTicket[index].tenTuyenXe}",style: AppThemes.Text18
+                      margin: EdgeInsets.symmetric(vertical: 10),
+                      padding: EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+                      decoration: BoxDecoration(border: Border.all(color: Colors.black12,width: 1),borderRadius: BorderRadius.all(Radius.circular(10))),
+                      child: Row(
+                        children: [
+                          Icon(Icons.directions_bus_outlined),
+                          SizedBox(width: 10,),
+                          Flexible(
+                            child: Text(
+                                "${myTicketController.ListTicket[index].tenTuyenXe}",style: AppThemes.Text18
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
+                        ],
+                      )),
                 );
               },
             )))

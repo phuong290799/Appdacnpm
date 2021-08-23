@@ -2,22 +2,29 @@ import 'dart:async';
 
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:ticketapp/Controller/Chair_controller.dart';
+import 'package:pattern_formatter/numeric_formatter.dart';
+
 import 'package:ticketapp/Controller/Login_controller.dart';
-import 'package:ticketapp/Home/Ticket.dart';
+import 'package:ticketapp/Controller/confirm_payment_controller.dart';
+
 import 'package:ticketapp/Models/ticketObj.dart';
 
-class BookSeat extends StatelessWidget {
+class BookSeat extends GetView<ConfirmPaymentController> {
+  ConfirmPaymentController controller=Get.put(ConfirmPaymentController());
+  late String day;
   late TicketObj obj;
+  late List<int> ListSeatBook;
   int selectPay=0;
   int save=0;
-  BookSeat(this.obj);
+  int indexEmpty=0;
+  BookSeat(this.obj,this.ListSeatBook,this.day);
 
 
-  ChairController controller = Get.put(ChairController());
-  LoginController loginController = Get.find();
+  //ChairController controller = Get.put(ChairController());
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -133,6 +140,7 @@ class BookSeat extends StatelessWidget {
                               //color: Colors.red,
                                 child: Center(
                                   child: TextField(
+
                                     controller: controller.Name,
                                     textCapitalization: TextCapitalization.characters,
                                     maxLines: 1,
@@ -171,6 +179,7 @@ class BookSeat extends StatelessWidget {
                             Text(
                               "Số thẻ",
                               style: TextStyle(
+
                                   color: Colors.grey,
                                   fontSize: 18,
                                   fontWeight: FontWeight.w600),
@@ -180,6 +189,7 @@ class BookSeat extends StatelessWidget {
                               //color: Colors.red,
                                 child: Center(
                                   child: TextField(
+                                    inputFormatters: [CreditCardFormatter()],
                                     controller: controller.cardNumberController,
                                     textCapitalization: TextCapitalization.characters,
                                     maxLines: 1,
@@ -193,6 +203,11 @@ class BookSeat extends StatelessWidget {
                                     },
                                     cursorHeight: 20,
                                     decoration: InputDecoration(
+                                      hintText: "XXXX XXXX XXXX XXXX",
+                                      hintStyle: TextStyle(
+                                          color: Color(0xffb2b2b2),
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w700),
                                       border: InputBorder.none,
                                     ),
                                   ),
@@ -230,6 +245,9 @@ class BookSeat extends StatelessWidget {
                                   //color: Colors.red,
                                     child: Center(
                                       child: TextField(
+                                        inputFormatters: [
+                                          MaskedInputFormatter('##/##')
+                                        ],
                                         controller: controller.expDateController,
                                         textCapitalization: TextCapitalization.characters,
                                         maxLines: 1,
@@ -330,7 +348,7 @@ class BookSeat extends StatelessWidget {
 
                   ],),
                   SizedBox(height: 30),
-                  Center(child:  buildConfirm(context),)
+                  Center(child:  buildConfirm(),)
 
                 ],
               ),
@@ -342,7 +360,7 @@ class BookSeat extends StatelessWidget {
     });
   }
 
-  Widget buildConfirm(BuildContext context){
+  Widget buildConfirm(){
     return InkWell(child: Card(
       elevation: 3,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
@@ -352,55 +370,43 @@ class BookSeat extends StatelessWidget {
         width: 250,
         child: Center(child: Text("Xác nhận thanh toán",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20,color: Colors.white),),
         ),),),onTap: (){
-      controller.payViaNewCard();
-//print("${controller.expDateController.text.substring(0,2)}");
-      /*if(controllerChair.ListSeatBook.isEmpty){
-        Timer timer = Timer(Duration(milliseconds: 1000), (){
-          Get.back();
-        });
-        Get.dialog(
-            AlertDialog(
-                content: Container(
-                  height: 80,
-                  //color: Colors.red,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text("Thông báo",style:TextStyle(color: Colors.red, fontSize: 25, fontWeight: FontWeight.bold)),
-                      SizedBox(height: 10),
-                      Container(
-                        height: 1,
-                        color: Color(0xffcecece),
-                      ),
-                      SizedBox(height: 20),
-                      Text("Bạn chưa chọn ghế nào",style:TextStyle(color:Color(0xff777777), fontSize: 20,))
-                    ],
-                  ),
-                )
-            )
-        ).then((value){
-          if (timer.isActive) {
-            timer.cancel();
-          }
-        });
+      if( double.parse(controller.GetAmount())<obj.donGia*ListSeatBook.length*0.3){
+        notification("Số tiền thanh toán tối thiểu là 30% giá vé");
       }
-      else{
-        Get.to(()=>BookSeat(obj));
-      }*/
+      else
+        {
+          if(double.parse(controller.GetAmount())>obj.donGia*ListSeatBook.length){
+            notification("Số tiền thanh toán lớn hơn tiền vé");
+          }
+          else
+            if(selectPay==1){
+              if(controller.Name.text.isEmpty||controller.cardNumberController.text.isEmpty||controller.expDateController.text.isEmpty||controller.cVCController.text.isEmpty){
+                notification("Vui lòng điền đầy đủ thông tin thẻ");
+              }
+              else
+                {
+
+                  controller.payViaNewCard(obj, ListSeatBook, day);
+                }
+            }
+        }
+
+
 
     });
   }
   Container buildPageOne() {
     return Container(
-      child: ListView(
+      child:  ListView(
         children: <Widget>[
           //SizedBox(height: 10),
+          const SizedBox(height: 10),
           buildContainerItem("Bến xe đi", "${obj.diaChiBxDi}"),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           buildContainerItem("Bến xe đến", "${obj.diaChiBxDen}"),
-          SizedBox(height: 10),
+         const SizedBox(height: 10),
           buildContainerItem("Giờ xuất bến", "${obj.gioXuatBen}"),
-          SizedBox(height: 10),
+         const SizedBox(height: 10),
           Container(
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -412,7 +418,7 @@ class BookSeat extends StatelessWidget {
           ),
           SizedBox(height: 10),
           buildContainerItem("Giá tiền",
-              "${NumberFormat.simpleCurrency(locale: "vi").format(obj.donGia * controller.ListSeatBook.length)}"),
+              "${NumberFormat.simpleCurrency(locale: "vi").format(obj.donGia * ListSeatBook.length)}"),
 
 
 
@@ -439,7 +445,7 @@ class BookSeat extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(
+               const Text(
                   "Thanh toán trước 30% giá vé ",
                   style: TextStyle(
                       color: Colors.grey,
@@ -497,7 +503,7 @@ class BookSeat extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(
+              const  Text(
                   "Ghi chú: ",
                   style: TextStyle(
                       color: Colors.grey,
@@ -532,19 +538,38 @@ class BookSeat extends StatelessWidget {
           )),
     );
   }
-
-  String GetAmount() {
-    String amount = "";
-    if (controller.amount.text != "0") {
-      for (int i = 0; i < controller.amount.text.length - 3; i++) {
-        if (controller.amount.text[i] != ".") {
-          amount = amount + controller.amount.text[i];
-        }
+  notification(String content){
+    Timer timer = Timer(Duration(milliseconds: 1000), (){
+      Get.back();
+    });
+    Get.dialog(
+        AlertDialog(
+            content: Container(
+              height: 100,
+              //color: Colors.red,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text("Thông báo",style:TextStyle(color: Colors.red, fontSize: 25, fontWeight: FontWeight.bold)),
+                  SizedBox(height: 10),
+                  Container(
+                    height: 1,
+                    color: Color(0xffcecece),
+                  ),
+                  SizedBox(height: 20),
+                  Text(content,style:TextStyle(color:Color(0xff777777), fontSize: 20,))
+                ],
+              ),
+            )
+        )
+    ).then((value){
+      if (timer.isActive) {
+        timer.cancel();
       }
-      return amount;
-    } else
-      return "0";
+    });
+
   }
+
 
   Widget buildContainerItem(String title, String content) {
     return Card(
@@ -584,11 +609,11 @@ class BookSeat extends StatelessWidget {
         ));
   }
 
-  Widget buildContainerAppBar() {
+  Widget  buildContainerAppBar() {
     return Container(
       color: Colors.blueAccent,
       padding: EdgeInsets.only(top: 40, bottom: 15),
-      child: Center(
+      child: const Center(
         child: Text(
           "Xác nhận thanh toán",
           style: TextStyle(
