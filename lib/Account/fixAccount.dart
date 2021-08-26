@@ -66,7 +66,7 @@ class _FixAccountState extends State<FixAccount> {
                         fontWeight: FontWeight.w300,
                         fontSize: 20)),
                 onTap: () {
-                  controller.apiUpdateInfo();
+                  controller.upLoadFile();
                 },
               ),
             ],

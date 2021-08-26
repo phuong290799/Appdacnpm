@@ -22,7 +22,7 @@ class AcountController extends GetxController{
   //File?file;
   var files=File("").obs;
   UploadTask?task;
-  
+
   @override
   void onInit() {
     print("1");
@@ -46,6 +46,7 @@ class AcountController extends GetxController{
     diaChi.text=prefs.getString("DiaChi")??"";
     ngaySinh.text=prefs.getString("NgaySinh")??"";
     imageUrl.text=prefs.getString("imageUrl")??"https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png";
+    imageUrl.text=imageUrl.text==""?"https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png":imageUrl.text;
     loadStatus.value=true;
   }
 
@@ -60,19 +61,28 @@ class AcountController extends GetxController{
   }
 
   Future upLoadFile()async{
-    if(files.value.path=="")return;
-    final fileName=basename(files.value.path);
-    task=FilebaseApi.uploadFile("file/$fileName",files.value);
-    if(task==null)return;
-    final snapshot=await task!.whenComplete((){});
-    final urlDownload=await snapshot.ref.getDownloadURL();
-    print(urlDownload);
+    Get.dialog(Center(child: CircularProgressIndicator()));
+    if(files.value.path=="")
+      {
+        apiUpdateInfo();
+      };
+    if(files.value.path!=""){
+      final fileName=basename(files.value.path);
+      task=FilebaseApi.uploadFile("Image/$fileName",files.value);
+      if(task==null)return;
+      final snapshot=await task!.whenComplete((){});
+      final urlDownload=await snapshot.ref.getDownloadURL();
+      print(urlDownload);
+      imageUrl.text=urlDownload;
+      apiUpdateInfo();
+    }
+
 
   }
 
+
   apiUpdateInfo()async{
-    upLoadFile();
-    Get.dialog(Center(child: CircularProgressIndicator()));
+
     SharedPreferences prefs= await SharedPreferences.getInstance();
     var headers = {"Content-type": "application/json"};
     Request request=Request(Url: "https://qlbvxk.herokuapp.com/api/customers/${prefs.getInt("MaND")}",header: headers,body:jsonEncode({
@@ -81,7 +91,7 @@ class AcountController extends GetxController{
       "Cmnd" : cmnd.text,
       "DiaChi" : diaChi.text,
       "NgaySinh" : ngaySinh.text ,
-      "imageUrl":"https://scontent-hkt1-1.xx.fbcdn.net/v/t1.6435-9/83034190_800149520461307_2927773317559484416_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=174925&_nc_ohc=5mT9Q0WctsUAX9UP7dZ&_nc_ht=scontent-hkt1-1.xx&oh=feca04032e8d3965d7df8c507965b0ab&oe=6148AED2"
+      "imageUrl":imageUrl.text
     }));
     request.put().then((value){
       if(value.statusCode==204){
@@ -93,6 +103,8 @@ class AcountController extends GetxController{
       Get.back();
     });
   }
+
+
 
  GetInfoUpdate(SharedPreferences prefs)async{
    var headers = {"Content-type": "application/json"};

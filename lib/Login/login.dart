@@ -135,9 +135,9 @@ class _LoginState extends State<Login> {
                                   fontWeight: FontWeight.bold)),
                         ),
                         onTap: () {
-                          Get.off(()=>BottomNavBar());
-                          /*loginController.apiLogin();
-                          FocusScope.of(context).unfocus();*/
+                          //Get.off(()=>BottomNavBar());
+                          loginController.apiLogin();
+                          FocusScope.of(context).unfocus();
                         },
                       ),
                     ),

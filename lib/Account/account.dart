@@ -159,7 +159,7 @@ class _AccountState extends State<Account> {
   }
 
   void _fix() {
-    Get.to(FixAccount());
+    Get.to(()=>FixAccount());
     // Get.to(() => FixAccount());
   }
 

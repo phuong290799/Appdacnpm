@@ -23,6 +23,7 @@ class vedadi extends StatelessWidget {
                   MyTicket myTicket=myTicketController.list(0)[index];
                   return InkWell(
                     onTap: (){
+                      myTicketController.apiIsReviewTicket(myTicket.maVe);
                       Get.to(()=>MyticketInfor(myTicket,2));
                       // print(controllervht.listTicketed[index].listcho);
                     },

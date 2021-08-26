@@ -7,6 +7,7 @@ import 'package:ticketapp/Controller/Myticket_controller.dart';
 import 'package:ticketapp/Models/myticket.dart';
 
 import 'package:ticketapp/widget/MySeparator.dart';
+import 'package:ticketapp/widget/bottomSheet.dart';
 
 class MyticketInfor extends StatelessWidget {
   late MyTicket myticket;
@@ -108,43 +109,7 @@ class MyticketInfor extends StatelessWidget {
               ),
             ),
             onTap: () {
-              buildShowModalBottomSheet(context);
-              //myTicketController.apiEvaluate();
-             /* Get.dialog(AlertDialog(
-                title: Text(
-                  "Thông báo",
-                  style: TextStyle(
-                      color: Colors.red,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold),
-                ),
-                content: Text("Bạn có muốn hủy vé ?",
-                    style: TextStyle(
-                      color: Color(0xff777777),
-                      fontSize: 20,
-                    )),
-                actions: <Widget>[
-                  FlatButton(
-                      child: Text("Có",
-                          style: TextStyle(
-                            color: Color(0xff777777),
-                            fontSize: 20,
-                          )),
-                      onPressed: () {
-                        Get.back();
-                        myTicketController.apiDelete(myticket);
-                      }),
-                  FlatButton(
-                      child: Text("Không",
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 20,
-                          )),
-                      onPressed: () {
-                        Get.back();
-                      }),
-                ],
-              ));*/
+              buildShowModalBottomSheet(context,myTicketController.starReview,myTicketController.textReview,sentoReview(myticket.maVe));
             },
           ):Container()),
         ],
@@ -152,144 +117,48 @@ class MyticketInfor extends StatelessWidget {
     );
   }
 
-  Future<dynamic> buildShowModalBottomSheet(BuildContext context) {
-    return showModalBottomSheet(
-              isScrollControlled: true,
-                context: context, builder: (context){
-              return  Container(
-
-                padding: EdgeInsets.symmetric(horizontal: 20,vertical: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Container(
-                        height: 25,
-                        width: 25,
-                        child:
-                        Image(image: AssetImage("assets/images/bus-icon.png"),),
-                      ),
-                      Text(
-                        "VeXeTot",
-                        style: TextStyle(fontStyle: FontStyle.italic,
-                            fontSize: 20,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w800),
-                      )
-                    ],
-                  ),
-                  SizedBox(height: 30),
-                  Text("Đánh giá chuyến đi",style:  TextStyle(fontStyle: FontStyle.italic,
-                      fontSize: 25,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w800),),
-                  SizedBox(height: 20),
-                  StatefulBuilder(builder: (BuildContext context, StateSetter setState){
-                    return  Container(
-                      //color: Colors.red,
-                      height: 50,
-
-                      child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: 5,
-                          itemBuilder: (context, index){
-                            return Container(
-
-                              margin: EdgeInsets.symmetric(horizontal: 15),
-                              child: InkWell(
-                                child: Icon(start>index?Icons.star:Icons.star_border,size: 40,color: start>index?Colors.amber:Colors.grey,),
-                                onTap: (){
-
-                                  print(start);
-                                  print(index);
-                                  if(index==0){
-                                    if(start==1){
-                                      setState((){
-                                        start=index;
-                                      });
-                                    }
-                                    else{
-                                      setState((){
-                                        start=index+1;
-                                      });
-                                    }
-                                  }
-                                  else{
-                                    setState((){
-                                      start=index+1;
-                                    });
-                                  }
-
-                                },
-                              ),);
-                          }),);
-                  },),
-                  SizedBox(height: 20),
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 10,horizontal: 15),
-                    height: 400,
-                    margin: EdgeInsets.symmetric(horizontal: 15),
-                    decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)),color: Colors.black12),
-                    child: TextField(
-                      //maxLength: 100,
-                      textCapitalization: TextCapitalization.sentences,
-                      maxLines: 4,
-                      controller: myTicketController.Evaluate,
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w400),
-                      keyboardType: TextInputType.text,
-
-                      onTap: () {
-                        // print(MediaQuery.of(context).viewPadding.bottom);
-                      },
-                      cursorHeight: 20,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                      ),
-                    ),),
-                  SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                    InkWell(
-                      child: Card(
-                        elevation: 3,
-                        shape: RoundedRectangleBorder(
-                            borderRadius:
-                            BorderRadius.all(Radius.circular(10))),
-                        color: Colors.black,
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 15),
-                          width: 250,
-                          child: Center(
-                            child: Text(
-                              "Đánh giá",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 20,
-                                  color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      ),
-                      onTap: () {
-                        myTicketController.apiEvaluate(start,myticket.maNhaXe);
-                      },
-                    ),
-                  ],)
-                ],
-              ),);
-            });
+  Widget sentoReview(int MaVe){
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        InkWell(
+          child: Card(
+            elevation: 3,
+            shape: RoundedRectangleBorder(
+                borderRadius:
+                BorderRadius.all(Radius.circular(10))),
+            color: Colors.black,
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                  horizontal: 15, vertical: 15),
+              width: 250,
+              child: Center(
+                child: Text(
+                  "Đánh giá",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 20,
+                      color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+          onTap: () {
+            if(myTicketController.isReview==true){
+              myTicketController.apiSenToReview(MaVe);
+            }
+            if(myTicketController.isReview==false){
+              myTicketController.apiEditReview();
+            }
+          },
+        ),
+      ],);
   }
+
 
   Widget buildBill(BuildContext context) {
     return Container(
-        height: 530,
+        height: 540,
         width: MediaQuery.of(context).size.width,
         child: Stack(children: [
           Positioned(
@@ -403,47 +272,50 @@ class MyticketInfor extends StatelessWidget {
                                             fontSize: 30,
                                             fontWeight: FontWeight.w800))))),
                     SizedBox(height: 20),
-                    InkWell(
-                      child: Card(
-                        elevation: 3,
-                        shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
-                        color: Colors.black,
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 15),
-                          width: 150,
-                          child: Center(
-                            child: Text(
-                              "Quay Lại",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 20,
-                                  color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      ),
-                      onTap: () {
-                        Get.back();
-                      },
-                    )
+
 
                     //buildContainerInfoTicket("Bui Thi Nga","24-12-2018"),
                   ],
                 ),
               )),
           Positioned(
-              top: 410,
+              top: 430,
               left: 5,
               right: 5,
               child: Container(
-                  child: Row(children: <Widget>[
-                buildContainerRadius(),
-                Expanded(child: const MySeparator(color: Color(0xffBDC4D3))),
-                buildContainerRadius()
-              ]))),
+                child:Column(children: <Widget>[
+                  Row(children: <Widget>[
+                    buildContainerRadius(),
+                    Expanded(child: const MySeparator(color: Color(0xffBDC4D3))),
+                    buildContainerRadius()
+                  ]),
+                  InkWell(
+                    child: Card(
+                      elevation: 3,
+                      shape: RoundedRectangleBorder(
+                          borderRadius:
+                          BorderRadius.all(Radius.circular(10))),
+                      color: Colors.black,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 15, vertical: 15),
+                        width: 150,
+                        child: Center(
+                          child: Text(
+                            "Quay Lại",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 20,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                    onTap: () {
+                      Get.back();
+                    },
+                  )
+                ],))),
         ]));
   }
 
@@ -465,13 +337,16 @@ class MyticketInfor extends StatelessWidget {
                       fontWeight: FontWeight.w600),
                 ),
                 SizedBox(height: 5),
-                Text(
+                Container(
+                  width: 150,
+                  child:  Text(
                   contentOne,
                   style: TextStyle(
                       fontSize: 20,
                       color: Colors.black,
                       fontWeight: FontWeight.w600),
-                ),
+                ),)
+
               ],
             ),
             Column(
