@@ -78,8 +78,11 @@ class ListPlace extends GetView<ListPlaceController>{
                       SizedBox(height: 15),
                     ],
                   ),onTap: (){
+
                     title=="Nơi xuất phát"?homeController.noidi.text=listPlaceController.listPalce[index].tenBxDi:homeController.noiden.text=listPlaceController.listPalce[index].tenBxDen;
+
                     title=="Nơi xuất phát"?homeController.tpDi=listPlaceController.listPalce[index].diaChiBxDi:homeController.tpDen=listPlaceController.listPalce[index].diaChiBxDen;
+
                     print(homeController.tpDi);
                     Get.back();
                   },),

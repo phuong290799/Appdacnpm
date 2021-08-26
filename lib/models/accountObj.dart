@@ -24,7 +24,7 @@ class AccountObj {
      diaChi = json['diaChi']??"";
      ngaySinh = json['ngaySinh']??"";
      vaitro = json['vaitro']??0;
-    imageUrl = json['imageUrl'];
+    imageUrl = json['imageUrl']??"";
   }
 
   Map<String, dynamic> toJson() {

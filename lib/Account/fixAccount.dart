@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ticketapp/Controller/Chair_controller.dart';
 import 'package:ticketapp/Controller/Home_controller.dart';
+import 'package:ticketapp/Controller/acount_controller.dart';
 import 'package:ticketapp/Theme/colors.dart';
 import 'package:ticketapp/Theme/styles.dart';
 
@@ -11,194 +12,153 @@ class FixAccount extends StatefulWidget {
 }
 
 class _FixAccountState extends State<FixAccount> {
-  late String name,phone,address,cmnd;
-  ChairController controllerfix = Get.put(ChairController());
+  AcountController controller = Get.put(AcountController());
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    print("0");
+
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        elevation: 1,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            InkWell(
-              onTap: () {
-                Get.back();
-              },
-              child: Container(
-                height: 50,
-                width: 50,
+        //resizeToAvoidBottomInset: false,
+        body: Obx(() => controller.loadStatus == true
+            ? Column(
+                children: <Widget>[buildAppBar(), buildInfo()],
+              )
+            : Center(
+                child: CircularProgressIndicator(),
+              )));
+  }
+
+  Container buildAppBar() {
+    return Container(
+      color: AppColors.background,
+      padding: EdgeInsets.symmetric(horizontal: 15),
+      height: 300,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          SizedBox(height: 50),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              InkWell(
                 child: Icon(
-                  Icons.arrow_back_ios_rounded,
-                  color: AppColors.primary,
+                  Icons.arrow_back_sharp,
+                  size: 20,
+                  color: Colors.white,
                 ),
-                decoration: BoxDecoration(
-                    color: AppColors.background,
-                    borderRadius: BorderRadius.circular(15)),
+                onTap: () {
+                  Get.back();
+                },
               ),
-            ),
-            Text("Cập nhật tài khoản", style: AppThemes.Text20Medium),
-            SizedBox(
-              width: 50,
-            ),
-          ],
-        ),
-        backgroundColor: AppColors.scaffold,
-
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(15),
-        child: Container(
-          padding: EdgeInsets.all(20),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: AppColors.colors_icons,
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.shadow.withOpacity(0.2),
-                    blurRadius: 20,
-                    offset: Offset(4,10),
-                  )
-                ]
-            ),
-
-          child: Form(
-
-            key: formKey,
-            child: Column(
-              children: [
-                TextFormField(
-                 // controller: controllerfix.name,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                     // controllerfix.accountObj.tenNd=value;
-                    } else {
-                      name=value;
-                    }
-                  },
-                  style: AppThemes.Text14,
-                  decoration: InputDecoration(
-                   // labelText:  "Họ tên: ${controllerfix.accountObj.tenNd}",
-                    prefixIcon: Icon(Icons.person_add_alt_1_outlined),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide:
-                      BorderSide(color: Colors.red, width: 2),
-                    ),
-                  ),
+              Text(
+                "Cập nhập Thông Tin",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 25,
                 ),
-                SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                  //controller: controllerfix.sdt,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                    //  controllerfix.accountObj.sdt=value;
-                    } else {
-                      phone = value;
-                    }
-                  },
-                  style: AppThemes.Text14,
-                  decoration: InputDecoration(
-                  //  labelText: "SDT: ${controllerfix.accountObj.sdt}",
-                    prefixIcon: Icon(Icons.phone),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide:
-                      BorderSide(color: Colors.red, width: 2),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                 // controller: controllerfix.diachi,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                   //   controllerfix.accountObj.diaChi=value;
-                    } else {
-                    address = value;
-                    }
-                  },
-                  style: AppThemes.Text14,
-                  decoration: InputDecoration(
-                   // labelText:"Địa chỉ: ${  controllerfix.accountObj.diaChi}",
-                    prefixIcon: Icon(Icons.location_on_outlined),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide:
-                      BorderSide(color: Colors.red, width: 2),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                 // controller: controllerfix.cmnd,
-                  obscureText: true,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                   //   controllerfix.accountObj.cmnd=value;
-                    } else {
-                      cmnd = value;
-                    }
-                  },
-                  style: AppThemes.Text14,
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.credit_card_sharp),
-                  //  labelText: "(CMND): ${ controllerfix.accountObj.cmnd}",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide:
-                      BorderSide(color: Colors.red, width: 2),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(30, 50, 30, 30),
-                  child: RaisedButton(
-                    onPressed: update,
-                    color: AppColors.background,
-                    child: Container(
-                      width: 250,
-                      height: 40,
-                      child: Center(
-                        child: Text(
-                          "Cập nhật",
-                          style: AppThemes.text18container,
-                        ),
-                      ),
-                    ),
-                    shape: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        borderSide:
-                        BorderSide(color: AppColors.background, width: 1)),
-                  ),
-                ),
-              ],
-            ),
+              ),
+              InkWell(
+                child: Text("Lưu",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w300,
+                        fontSize: 20)),
+                onTap: () {
+                  controller.apiUpdateInfo();
+                },
+              ),
+            ],
           ),
-
-        ),
+          SizedBox(height: 40),
+          InkWell(
+              child: controller.files.value.path == ""
+                  ? CircleAvatar(
+                      maxRadius: 70,
+                      backgroundImage:
+                          NetworkImage("${controller.imageUrl.text}"),
+                    )
+                  : CircleAvatar(
+                maxRadius: 70,
+                backgroundImage: FileImage(controller.files.value),
+                    ),
+              onTap: () {
+                controller.selectFile();
+              })
+        ],
       ),
     );
   }
-  void update(){
-    if (formKey.currentState!.validate()) {
-      updateAccount();
-      Get.back();
-    }
+
+  Expanded buildInfo() {
+    return Expanded(
+        child: Container(
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+      child: Center(
+          child: NotificationListener<OverscrollIndicatorNotification>(
+        onNotification: (OverscrollIndicatorNotification overscroll) {
+          overscroll.disallowGlow();
+          return true;
+        },
+        child: SingleChildScrollView(
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                buildItemInfo("Tên", controller.ten),
+                SizedBox(height: 35),
+                buildItemInfo("SDT", controller.sdt),
+                SizedBox(height: 35),
+                buildItemInfo("CMND", controller.cmnd),
+                SizedBox(height: 35),
+                buildItemInfo("Địa Chỉ", controller.diaChi),
+                SizedBox(height: 35),
+                buildItemInfo("Ngày Sinh", controller.ngaySinh),
+                SizedBox(height: 35)
+              ],
+            ),
+          ),
+        ),
+      )),
+    ));
   }
-  void updateAccount(){
 
-    print("hhi");
-
-    //controllerfix.apiUpdateInfo();
+  Container buildItemInfo(String name, TextEditingController controller) {
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            name,
+            style: TextStyle(
+              color: Colors.grey,
+              fontWeight: FontWeight.w600,
+              fontSize: 18,
+            ),
+          ),
+          TextField(
+            keyboardType: name == "SDT" || name == "CMND"
+                ? TextInputType.number
+                : (name == "Ngày Sinh"
+                    ? TextInputType.datetime
+                    : TextInputType.text),
+            textCapitalization: TextCapitalization.words,
+            controller: controller,
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w600,
+              fontSize: 20,
+            ),
+            decoration: InputDecoration(border: InputBorder.none),
+          ),
+          Container(
+            height: 2,
+            color: Colors.black12,
+          )
+        ],
+      ),
+    );
   }
 }

@@ -1,4 +1,4 @@
-class Review {
+class Reviews {
   late String tenNhaXe;
   late String tenNd;
   late String sdt;
@@ -7,7 +7,7 @@ class Review {
   late int sao;
    late String noiDungDanhGia;
 
-  Review(
+  Reviews(
       {required this.tenNhaXe,
         required this.tenNd,
         required this.sdt,
@@ -15,7 +15,7 @@ class Review {
         required this.sao,
         required this.noiDungDanhGia});
 
-  Review.fromJson(Map<String, dynamic> json) {
+  Reviews.fromJson(Map<String, dynamic> json) {
     tenNhaXe = json['tenNhaXe'];
     tenNd = json['tenNd'];
     sdt = json['sdt'];

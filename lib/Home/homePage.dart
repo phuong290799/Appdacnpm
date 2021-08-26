@@ -7,12 +7,11 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:ticketapp/Controller/Home_controller.dart';
-import 'package:ticketapp/Home/historySearch.dart';
-import 'package:ticketapp/Home/ketquaSearch.dart';
+
 import 'package:ticketapp/Home/listPlace.dart';
-import 'package:ticketapp/Models/searchObj.dart';
+
 import 'package:ticketapp/Theme/colors.dart';
-import 'package:ticketapp/Theme/styles.dart';
+
 import 'package:flutter/services.dart';
 
 class HomePage extends StatefulWidget {
@@ -377,7 +376,7 @@ class _HomePageState extends State<HomePage> {
                         child: buildColumnInputItem(
                             homeController.noidi.text, true),
                         onTap: () {
-                          Get.to(()=>ListPlace("Nơi xuất phát"));
+                          Get.to(() => ListPlace("Nơi xuất phát"));
                         }),
                     Container(
                       height: 1,
@@ -390,7 +389,9 @@ class _HomePageState extends State<HomePage> {
                     InkWell(
                         child: buildColumnInputItem(
                             homeController.noiden.text, false),
-                        onTap: () {Get.to(()=>ListPlace("Bạn muốn đi đâu"));}),
+                        onTap: () {
+                          Get.to(() => ListPlace("Bạn muốn đi đâu"));
+                        }),
                   ],
                 )
               ],

@@ -57,7 +57,7 @@ class MyticketInfor extends StatelessWidget {
                             fontSize: 25,
                             fontWeight: FontWeight.bold),
                       ),
-                      content: Text("Bạn có muốn hủy vé ?",
+                      content: Text("Tiền vé sẽ không được hoàn lại\nBạn có muốn hủy vé ?",
                           style: TextStyle(
                             color: Color(0xff777777),
                             fontSize: 20,
@@ -349,7 +349,7 @@ class MyticketInfor extends StatelessWidget {
                         myticket.maChoNgoi.toString()),
                     SizedBox(height: 15),
                     buildContainerInfoTicket("Mã vé xe", status!=3?"Đã Thanh toán":"",
-                        myticket.maVe.toString(), status!=3?NumberFormat.simpleCurrency(locale: "vi").format(myticket.donGia):""),
+                        myticket.maVe.toString(), status!=3?NumberFormat.simpleCurrency(locale: "vi").format(myticket.daThanhToan):""),
                     SizedBox(height: 15),
                     buildContainerInfoTicket(
                         "Bến xe",

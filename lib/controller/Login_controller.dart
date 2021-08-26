@@ -107,6 +107,12 @@ class LoginController extends GetxController {
         SharedPreferences prefs= await SharedPreferences.getInstance();
         prefs.setInt("VaiTro", accountObj.vaitro);
         prefs.setInt("MaND", accountObj.maNd);
+        prefs.setString("Ten", accountObj.tenNd);
+        prefs.setString("sdt", accountObj.sdt);
+        prefs.setString("NgaySinh", accountObj.ngaySinh.substring(0,10));
+        prefs.setString("DiaChi", accountObj.diaChi);
+        prefs.setString("CMND", accountObj.cmnd);
+        prefs.setString("imageUrl", accountObj.imageUrl);
         this.accountObj=accountObj;
         print("Ma ${this.accountObj.maNd}");
         print("Ten ${this.accountObj.tenNd}");

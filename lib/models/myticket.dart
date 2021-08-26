@@ -10,6 +10,7 @@ class MyTicket {
   late double donGia;
    late String ghiChu;
   late bool trangThai;
+  late double daThanhToan;
 
   MyTicket(
       {required this.maVe,
@@ -22,7 +23,7 @@ class MyTicket {
         required this.ngayDi,
         required this.donGia,
         required this.ghiChu,
-        required this.trangThai});
+        required this.trangThai,required this.daThanhToan});
 
   MyTicket.fromJson(Map<String, dynamic> json) {
     maVe = json['maVe'];
@@ -36,11 +37,13 @@ class MyTicket {
     donGia = json['donGia'];
     ghiChu = json['ghiChu'];
     trangThai = json['trangThai'];
+    daThanhToan=json["daThanhToan"];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['maVe'] = this.maVe;
+    data['daThanhToan']=this.daThanhToan;
     data['maNhaXe'] = this.maNhaXe;
     data['tenKh'] = this.tenKh;
     data['sdt'] = this.sdt;

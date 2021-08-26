@@ -35,7 +35,7 @@ class vedahuy extends StatelessWidget {
                         SizedBox(width: 10,),
                         Flexible(
                           child: Text(
-                              "${myTicketController.ListTicket[index].tenTuyenXe}",style: AppThemes.Text18
+                              "${myTicket.tenTuyenXe}",style: AppThemes.Text18
                           ),
                         ),
                       ],

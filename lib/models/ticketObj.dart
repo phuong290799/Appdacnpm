@@ -9,6 +9,7 @@ class TicketObj {
  late String gioXuatBen;
  late int thoiGianDiChuyen;
  late double donGia;
+ late int maNhaXe;
 
   TicketObj(
       {required this.maChuyenXe,
@@ -20,7 +21,7 @@ class TicketObj {
         required this.soChoNgoi,
         required this.gioXuatBen,
         required this.thoiGianDiChuyen,
-        required this.donGia});
+        required this.donGia,required this.maNhaXe});
 
   TicketObj.fromJson(Map<String, dynamic> json) {
     maChuyenXe = json['maChuyenXe'];
@@ -33,6 +34,7 @@ class TicketObj {
     gioXuatBen = json['gioXuatBen'];
     thoiGianDiChuyen = json['thoiGianDiChuyen'];
     donGia = json['donGia'];
+    maNhaXe = json['maNhaXe'];
   }
 
   Map<String, dynamic> toJson() {
@@ -47,6 +49,7 @@ class TicketObj {
     data['gioXuatBen'] = this.gioXuatBen;
     data['thoiGianDiChuyen'] = this.thoiGianDiChuyen;
     data['donGia'] = this.donGia;
+    data['maNhaXe'] = this.maNhaXe;
     return data;
   }
 }

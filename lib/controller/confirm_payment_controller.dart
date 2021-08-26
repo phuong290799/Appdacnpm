@@ -105,6 +105,7 @@ late List<MyTicket> list;
     Request request = Request(
         Url: "https://qlbvxk.herokuapp.com/api/tickets/",
         body: json.encode({
+          "daThanhToan":double.parse(GetAmount())/list.length,
           "MaKh" : loginController.accountObj.maNd,
           "MaChoNgoi" : list,
           "MaChuyenXe" : obj.maChuyenXe,
@@ -118,7 +119,7 @@ late List<MyTicket> list;
         this.list=response.map((e){
           return MyTicket.fromJson(e);
         }).toList();
-        Get.off(()=>Ticket(this.list,amount.text));
+        Get.offAll(()=>Ticket(this.list,amount.text));
         print(value.statusCode);
       }
       else{

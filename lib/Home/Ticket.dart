@@ -74,7 +74,7 @@ class Ticket extends StatelessWidget {
                     SizedBox(height: 15),
                     buildContainerInfoTicket("Biển số","Ghế                   ",listTicket[0].bienSoXe,"${getSeat()}"),
                     SizedBox(height: 15),
-                    buildContainerInfoTicket("Mã vé xe","Đã Thanh toán",listTicket[0].maVe.toString(),amount),
+                    buildContainerInfoTicket("Mã vé xe","Đã Thanh toán",listTicket[0].maVe.toString(),NumberFormat.simpleCurrency(locale: "vi").format(listTicket[0].daThanhToan*listTicket.length)),
                     SizedBox(height: 15),
                     buildContainerInfoTicket(
                         "Bến xe", "Giờ                    ", getNameBusTrip(listTicket[0].tenTuyenXe), listTicket[0].ngayDi.substring(11,16)),

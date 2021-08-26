@@ -12,7 +12,7 @@ import 'package:ticketapp/Models/ticketObj.dart';
 import 'package:ticketapp/http/request.dart';
 
 class HomeController extends GetxController {
-  var maCx;
+
   var day = "".obs;
   final TextEditingController noidi = TextEditingController();
   final TextEditingController noiden = TextEditingController();
@@ -20,7 +20,6 @@ class HomeController extends GetxController {
   LoginController loginController = Get.find();
    String tpDi="";
    String tpDen="";
-
   List<TicketObj> listsearch = [];
   @override
   void onInit() {
@@ -31,6 +30,9 @@ class HomeController extends GetxController {
     super.onInit();
   }
 
+
+
+
   @override
   void apiGetAllBusStation() async {
     Get.dialog(Center(child: CircularProgressIndicator()),
@@ -38,7 +40,6 @@ class HomeController extends GetxController {
     var headers = {"Content-type": "application/json"};
     Request request = Request(
         Url: "https://qlbvxk.herokuapp.com/api/busstations",
-        body: jsonEncode({"Email": noidi.text, "MatKhau": noiden.text}),
         header: headers);
     request.get().then((value) {
       var responseData = jsonDecode(value.body) as List;
@@ -47,7 +48,7 @@ class HomeController extends GetxController {
       }).toList();
       tk(ListBusStation);
     }).catchError((e) {
-      print("loi ${e.toString()}");
+      print("Lỗi load tất cả ${e.toString()}");
     });
   }
 
@@ -63,7 +64,6 @@ class HomeController extends GetxController {
           print(url);
           Request request = Request(
               Url: url,
-              body: jsonEncode({"Email": noidi.text, "MatKhau": noiden.text}),
               header: headers);
           request.get().then((value) {
             if (value.body != "") {
@@ -72,14 +72,15 @@ class HomeController extends GetxController {
                 return TicketObj.fromJson(e);
               }).toList();
               Get.back();
+
               SearchObj obj = SearchObj(
                   noiDen: getTenBx(s, noiden.text.toUpperCase()),
                   noiDi: getTenBx(s, noidi.text.toUpperCase()),
                   ngayDi: day.value);
               addHistory(obj);
               Get.to(() => KetquaSearch(
-                noidi: tpDi==""?"Hà Nội":tenTP(tpDi),
-                noiden: tpDen==""?"Đà nẵng":tenTP(tpDen),
+                noidi: tpDi=="-"?"Hà Nội":tenTP(tpDi),
+                noiden: tpDen=="-"?"Đà nẵng":tenTP(tpDen),
                 day: day.value,
                   ));
             } else
@@ -88,16 +89,16 @@ class HomeController extends GetxController {
         } else {
           Get.back();
           Get.to(() => KetquaSearch(
-            noidi: tpDi==""?"Hà Nội":tenTP(tpDi),
-            noiden: tpDen==""?"Đà nẵng":tenTP(tpDen),
+            noidi: tpDi=="-"?"Hà Nội":tenTP(tpDi),
+            noiden: tpDen=="-"?"Đà nẵng":tenTP(tpDen),
                 day: day.value,
               ));
         }
       } else {
         Get.back();
         Get.to(() => KetquaSearch(
-          noidi: tpDi==""?"Hà Nội":tenTP(tpDi),
-          noiden: tpDen==""?"Đà nẵng":tenTP(tpDen),
+          noidi: tpDi=="-"?"Hà Nội":tenTP(tpDi),
+          noiden: tpDen=="-"?"Đà nẵng":tenTP(tpDen),
           day: day.value,
             ));
       }
@@ -114,7 +115,7 @@ class HomeController extends GetxController {
   }
 
   String tenTP(String diaChiBenXe) {
-    String tp="";
+    String tp="-";
     if(diaChiBenXe.contains("Thừa Thiên Huế")){
       tp = diaChiBenXe.substring(diaChiBenXe.length-4, diaChiBenXe.length);
       print(tp);
@@ -205,7 +206,6 @@ class HomeController extends GetxController {
     var headers = {"Content-type": "application/json"};
     Request request = Request(
         Url: url,
-        body: {"noiDen": "i", "noiDi": "i", "ngayDi": "i"},
         header: headers);
     request.get().then((value) {
       var responsedata = jsonDecode(value.body) as List;

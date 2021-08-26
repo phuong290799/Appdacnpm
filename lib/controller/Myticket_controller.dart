@@ -119,6 +119,7 @@ class MyTicketController extends GetxController {
       ListTicketDelete.value = list.where((element) {
         return element.trangThai == false;
       }).toList();
+      print("SO VE DA HUY: ${ListTicketDelete.length}");
       ListTicket.value = list.where((element) {
         return element.trangThai == true;
       }).toList();

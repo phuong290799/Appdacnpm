@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import 'package:ticketapp/Controller/Chair_controller.dart';
 import 'package:ticketapp/Home/bookSeat.dart';
+import 'package:ticketapp/Home/review.dart';
 import 'package:ticketapp/Models/ticketObj.dart';
 
 import 'package:ticketapp/Theme/colors.dart';
@@ -21,12 +22,7 @@ class SelectChair extends GetView<ChairController> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    /*controllerChair.obj=this.obj;
-    controllerChair.Time=this.day;*/
-   /* controllerChair.Time=day;
-    controllerChair.obj=obj;*/
-    print("render");
-    //controllerChair.apiGetListSeatEmpty(obj, day);
+
     return Scaffold(
       body: Column(
         children: <Widget>[
@@ -189,7 +185,11 @@ class SelectChair extends GetView<ChairController> {
                   ],
                 );
               }),
-              Text("Số vé ${controllerChair.ListSeatBook.length}"),
+
+              InkWell(child: Text("Xem đánh giá"),
+                onTap: (){
+                Get.to(()=>Review(obj.maNhaXe));
+                },),
               SizedBox(height: 70),
               InkWell(child: Card(
                 elevation: 3,
