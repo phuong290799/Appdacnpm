@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart';
 
@@ -18,18 +19,28 @@ Future main() async {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+        builder: (BuildContext context, Widget?  child) {
+      ScreenUtil.init(
+          BoxConstraints(
+              maxWidth: MediaQuery.of(context).size.width,
+              maxHeight: MediaQuery.of(context).size.height),
+          designSize: Size(360, 825),
+          orientation: Orientation.portrait);
+      return MediaQuery(
+        data: MediaQuery.of(context).copyWith(
+            textScaleFactor: 0.8), //set desired text scale factor here,
+        child: child??Container(),
+      );},
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-     // home:bottomNav(),
-      // locale: LocalizationService.locale,
-      // fallbackLocale: LocalizationService.fallbackLocale,
-      // translations: LocalizationService(),
       home: Login(),
     );
   }
 }
+
+
+
+
 

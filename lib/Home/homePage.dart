@@ -152,7 +152,7 @@ class _HomePageState extends State<HomePage> {
   Container buildContainerHistory() {
     return Container(
         padding: EdgeInsets.symmetric(horizontal: 10),
-        height: 110,
+        height: 125,
         decoration: BoxDecoration(color: Colors.transparent),
         child: Obx(() => homeController.listHistory.length == 0
             ? Center(
@@ -166,7 +166,7 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.all(5),
                     child: Container(
                         //decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(40)),color: Colors.deepPurpleAccent),
-                        height: 120,
+                        height: 200,
                         width: 230,
                         child: Card(
                           shape: RoundedRectangleBorder(
@@ -199,13 +199,14 @@ class _HomePageState extends State<HomePage> {
                                     SizedBox(
                                       width: 10,
                                     ),
-                                    Text(
+                                    Container(child: Text(
                                       "${homeController.listHistory[index].noiDi}",
                                       style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.black),
                                     ),
+                                    width:150 ,),
                                     Expanded(
                                         child: Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
