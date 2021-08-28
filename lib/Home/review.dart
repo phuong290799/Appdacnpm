@@ -69,7 +69,7 @@ class Review extends GetView<ReviewController> {
           ),
           SizedBox(height: 30),
           Text(
-            "${NumberFormat('###.   #').format(reviewController.star.value)}",
+            "${NumberFormat('###.#').format(reviewController.star.value)}",
             style: TextStyle(
                 color: Colors.black, fontSize: 50, fontWeight: FontWeight.w800),
           ),

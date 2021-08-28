@@ -1,12 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:ticketapp/Account/account.dart';
-import 'package:ticketapp/Controller/controller_theme.dart';
 import 'package:ticketapp/Myticket/myticket.dart';
-import 'package:ticketapp/Notify/notify.dart';
 import 'package:ticketapp/Theme/colors.dart';
-
 import 'homePage.dart';
 
 
@@ -41,10 +37,6 @@ backgroundColor: Color(0xfff2f2f2),
          //   activeIcon:Icon(Icons.my_library_add,),
             label: 'Vé của tôi',
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.notifications_none,size: 22),
-          //  activeIcon:Icon(Icons.campaign,),
-            label: 'Thông báo',
-          ),
           BottomNavigationBarItem(icon: Icon(Icons.account_circle_outlined,size: 22),
           //  activeIcon:Icon(Icons.person,),
             label: 'Tài khoản',
@@ -60,10 +52,6 @@ backgroundColor: Color(0xfff2f2f2),
             case 1: return CupertinoTabView(
               builder: (context) {
                 return CupertinoPageScaffold(child:Myticket());
-              },);
-            case 2: return CupertinoTabView(
-              builder: (context) {
-                return CupertinoPageScaffold(child: Notify());
               },);
             default: return CupertinoTabView(
               builder: (context) {

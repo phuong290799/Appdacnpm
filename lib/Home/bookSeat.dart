@@ -370,8 +370,8 @@ class BookSeat extends GetView<ConfirmPaymentController> {
         width: 250,
         child: Center(child: Text("Xác nhận thanh toán",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20,color: Colors.white),),
         ),),),onTap: (){
-      if( double.parse(controller.GetAmount())<obj.donGia*ListSeatBook.length*0.3){
-        notification("Số tiền thanh toán tối thiểu là 30% giá vé");
+      if( double.parse(controller.GetAmount())<obj.donGia*ListSeatBook.length*0.5){
+        notification("Số tiền thanh toán tối thiểu là 50% giá vé");
       }
       else
         {
@@ -446,7 +446,7 @@ class BookSeat extends GetView<ConfirmPaymentController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                const Text(
-                  "Thanh toán trước 30% giá vé ",
+                  "Thanh toán trước 50% giá vé ",
                   style: TextStyle(
                       color: Colors.grey,
                       fontSize: 18,

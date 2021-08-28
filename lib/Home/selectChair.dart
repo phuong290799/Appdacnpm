@@ -262,13 +262,13 @@ class SelectChair extends GetView<ChairController> {
       color: AppColors.background,
       child: Column(
         children: <Widget>[
-          Text("${obj.diaChiBxDi}",
+          Text("${obj.tenBxDi}",
               style: TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.w300,
                   color: Colors.white)),
           SizedBox(height: 5),
-          Text("${obj.diaChiBxDen}",
+          Text("${obj.tenBxDen}",
               style: TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.w300,

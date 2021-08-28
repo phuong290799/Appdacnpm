@@ -70,28 +70,7 @@ class _AccountState extends State<Account> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          SizedBox(height: 50),
-          InkWell(
-            child: buildRow(
-              "Quản lí thẻ",
-              "Lưu thẻ và thanh toán với 1 chạm",
-              Icon(
-                Icons.credit_card,
-                size: 30,
-                color: Colors.grey,
-              ),
-            ),
-            onTap: () {
-              _quanly();
-            },
-          ),
-          SizedBox(height: 15),
-          Container(
-            color: Color(0xffe5e5e5),
-            height: 1,
-            width: MediaQuery.of(context).size.width,
-          ),
-          SizedBox(height: 15),
+          SizedBox(height: 10),
           InkWell(
             child: buildRow(
               "Cài đặt",
@@ -106,13 +85,13 @@ class _AccountState extends State<Account> {
               _thietlap();
             },
           ),
-          SizedBox(height: 15),
+          SizedBox(height: 25),
           Container(
             color: Color(0xffe5e5e5),
             height: 1,
             width: MediaQuery.of(context).size.width,
           ),
-          SizedBox(height: 15),
+          SizedBox(height: 25),
           InkWell(
             child: buildRow(
               "Góp ý",
@@ -127,15 +106,37 @@ class _AccountState extends State<Account> {
               _gopy();
             },
           ),
+
+          SizedBox(height: 25),
+          Container(
+            color: Color(0xffe5e5e5),
+            height: 1,
+            width: MediaQuery.of(context).size.width,
+          ),
+          SizedBox(height: 25),
+          InkWell(
+            child: buildRow(
+              "Thông tin thêm",
+              "Lưu thẻ và thanh toán với 1 chạm",
+              Icon(
+                Icons.info_outline,
+                size: 30,
+                color: Colors.grey,
+              ),
+            ),
+            onTap: () {
+              _quanly();
+            },
+          ),
           SizedBox(height: 200),
-          Center(child: Container(
-            height: 50,
-            width: 200,
-            decoration: BoxDecoration(color:AppColors.background, borderRadius: BorderRadius.all(Radius.circular(10))),
-            child:Center(child: InkWell(child: Text("Đăng xuất", style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
-            onTap: (){
-              Get.offAll(Login());
-            },))))
+         InkWell(child:  Center(child: Container(
+             height: 50,
+             width: 200,
+             decoration: BoxDecoration(color:AppColors.background, borderRadius: BorderRadius.all(Radius.circular(10))),
+             child:Center(child: Text("Đăng xuất", style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold))))),
+         onTap: (){
+           Get.offAll(()=>Login());
+         },)
         ],
       ),
     ));
@@ -150,8 +151,8 @@ class _AccountState extends State<Account> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(title, style: TextStyle(color: Colors.black, fontSize: 20)),
-            title== "Quản lí thẻ"?SizedBox(height: 10):SizedBox(height: 0),
-            title=="Quản lí thẻ"?Text(detail, style: TextStyle(color: Colors.grey, fontSize: 15)):Container(),
+           SizedBox(height: 10),
+            Text(detail, style: TextStyle(color: Colors.grey, fontSize: 15)),
           ],
         )
       ],

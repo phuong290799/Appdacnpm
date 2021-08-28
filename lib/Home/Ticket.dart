@@ -30,7 +30,7 @@ class Ticket extends StatelessWidget {
 
   Widget buildBill(BuildContext context) {
     return Container(
-        height: 530,
+        height: 550,
         width: MediaQuery.of(context).size.width,
         child: Stack(children: [
           Positioned(
@@ -85,18 +85,7 @@ class Ticket extends StatelessWidget {
 
                     ),
                     SizedBox(height: 20),
-                    InkWell(child:  Card(
-                      elevation: 3,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
-                      color: Colors.black,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 15,vertical: 15),
-                        width: 150,
-                        child: Center(child: Text("Màn Hình Chính",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20,color: Colors.white),),
-                        ),),),
-                    onTap: (){
-                      Get.offAll(()=> BottomNavBar());
-                    },)
+
 
 
                     //buildContainerInfoTicket("Bui Thi Nga","24-12-2018"),
@@ -104,17 +93,33 @@ class Ticket extends StatelessWidget {
                 ),
               )),
           Positioned(
-              top: 410,
+              top: 420,
               left: 5,
               right: 5,
               child: Container(
-                  child: Row(children: <Widget>[
-                    buildContainerRadius(),
-                    Expanded(
-                        child: const MySeparator(
-                            color: Color(0xffBDC4D3))),
-                    buildContainerRadius()
-                  ]))),
+                  child: Column(
+                    children: <Widget>[
+                      Row(children: <Widget>[
+                        buildContainerRadius(),
+                        Expanded(
+                            child: const MySeparator(
+                                color: Color(0xffBDC4D3))),
+                        buildContainerRadius()
+                      ]),
+                      InkWell(child:  Card(
+                        elevation: 3,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+                        color: Colors.black,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 15,vertical: 15),
+                          width: 150,
+                          child: Center(child: Text("Màn Hình Chính",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20,color: Colors.white),),
+                          ),),),
+                        onTap: (){
+                          Get.offAll(()=> BottomNavBar());
+                        },)
+                    ],
+                  ))),
         ]));
   }
 
@@ -131,10 +136,11 @@ class Ticket extends StatelessWidget {
               color: Colors.grey,
               fontWeight: FontWeight.w600),),
           SizedBox(height: 5),
-          Text(contentOne,style:  TextStyle(
+          Container(child: Text(contentOne,style:  TextStyle(
               fontSize: 20,
               color: Colors.black,
               fontWeight: FontWeight.w600),),
+          width: 150,)
         ],),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -63,10 +63,11 @@ late List<MyTicket> list;
     final CreditCard card = CreditCard(
         name: this.Name.text,
         number: this.cardNumberController.text,
-        expMonth: 04, //int.parse(this.expDateController.text.substring(0,2)),
-        expYear: 25, //int.parse(this.expDateController.text.substring(3,5)),
+        expMonth: int.parse(this.expDateController.text.substring(0,2)),
+        expYear: int.parse(this.expDateController.text.substring(3,5)),
         cvc: this.cVCController.text);
     StripePayment.createTokenWithCard(card).then((token) {
+
       print(token.tokenId);
       var body = {
         'amount': GetAmount(),
@@ -85,11 +86,45 @@ late List<MyTicket> list;
         if (value.statusCode == 200) {
           print("thanh cong");
           apiBookTicket(obj, list,day);
-        } else {
-          print("that bai");
+        } if(value.statusCode==402) {
+          print("That bai");
 
         }
+      }).catchError((onError){
+        print("that bai");
       });
+    }).catchError((onError){
+      Get.back();
+      Timer timer = Timer(Duration(milliseconds: 1000), (){
+        Get.back();
+
+      });
+      Get.dialog(
+          AlertDialog(
+              content: Container(
+                height: 100,
+                //color: Colors.red,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text("Thông báo",style:TextStyle(color: Colors.red, fontSize: 25, fontWeight: FontWeight.bold)),
+                    SizedBox(height: 10),
+                    Container(
+                      height: 1,
+                      color: Color(0xffcecece),
+                    ),
+                    SizedBox(height: 20),
+                    Text("Thông tin thẻ bị sai, vui lòng nhập lại !",style:TextStyle(color:Color(0xff777777), fontSize: 20,))
+                  ],
+                ),
+              )
+          )
+      ).then((value){
+        if (timer.isActive) {
+          timer.cancel();
+        }
+      });
+
     });
 
   }

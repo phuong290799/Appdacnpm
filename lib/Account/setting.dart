@@ -56,38 +56,7 @@ class _SettingState extends State<Setting> {
         padding: EdgeInsets.all(15),
         child: Column(
           children: [
-            Container(
-              padding: EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: AppColors.colors_icons,
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.shadow.withOpacity(0.2),
-                      blurRadius: 20,
-                      offset: Offset(4, 10),
-                    )
-                  ]),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.language,
-                    color: AppColors.background,
-                    size: 30,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text(
-                    "Ngôn ngữ",
-                    style: AppThemes.Text16,
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
+            SizedBox(height: 50),
             Column(
               children: [
                 InkWell(
@@ -187,37 +156,9 @@ class _SettingState extends State<Setting> {
               ],
             ),
             SizedBox(
-              height: 20,
+              height: 500,
             ),
-            Container(
-              padding: EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: AppColors.colors_icons,
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.shadow.withOpacity(0.2),
-                      blurRadius: 20,
-                      offset: Offset(4, 10),
-                    )
-                  ]),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.text_fields,
-                    color: AppColors.background,
-                    size: 30,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text(
-                    "Cỡ chữ",
-                    style: AppThemes.Text16,
-                  ),
-                ],
-              ),
-            ),
+
             Padding(
               padding: const EdgeInsets.only(top: 50,bottom: 50),
               child: RaisedButton(

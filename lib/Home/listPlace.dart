@@ -62,8 +62,8 @@ class ListPlace extends GetView<ListPlaceController>{
   Expanded buildExpanded() {
     return Expanded(child: Container(
       padding: EdgeInsets.symmetric(horizontal: 20,vertical: 15),
-          child: Obx(()=>listPlaceController.listPalce.length==0?Center(child: CircularProgressIndicator()):ListView.builder(
-              itemCount: listPlaceController.listPalce.value.length,
+          child: Obx(()=>listPlaceController.listPlace.length==0?Center(child: CircularProgressIndicator()):ListView.builder(
+              itemCount:title=="Nơi xuất phát"?listPlaceController.listPlaceDiObs.length:listPlaceController.listPlaceDenObs.length,
               itemBuilder: (context, index){
                 return Container(
                   child: InkWell(child: Column(
@@ -71,7 +71,7 @@ class ListPlace extends GetView<ListPlaceController>{
                       Row(children: <Widget>[
                         Icon(Icons.location_on_outlined,size: 25,color: Color(0xffadadad),),
                         SizedBox(width: 20),
-                        Text(title=="Nơi xuất phát"?listPlaceController.listPalce[index].tenBxDi:listPlaceController.listPalce[index].tenBxDen,style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400, color: Color(0xff686868)),)
+                        Text(title=="Nơi xuất phát"?listPlaceController.listPlaceDiObs[index].tenBxDi:listPlaceController.listPlaceDenObs[index].tenBxDen,style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400, color: Color(0xff686868)),)
                       ],),
                       SizedBox(height: 15),
                       Container(color: Colors.black12,height: 1),
@@ -79,9 +79,9 @@ class ListPlace extends GetView<ListPlaceController>{
                     ],
                   ),onTap: (){
 
-                    title=="Nơi xuất phát"?homeController.noidi.text=listPlaceController.listPalce[index].tenBxDi:homeController.noiden.text=listPlaceController.listPalce[index].tenBxDen;
+                    title=="Nơi xuất phát"?homeController.noidi.text=listPlaceController.listPlaceDiObs[index].tenBxDi:homeController.noiden.text=listPlaceController.listPlaceDenObs[index].tenBxDen;
 
-                    title=="Nơi xuất phát"?homeController.tpDi=listPlaceController.listPalce[index].diaChiBxDi:homeController.tpDen=listPlaceController.listPalce[index].diaChiBxDen;
+                    title=="Nơi xuất phát"?homeController.tpDi=listPlaceController.listPlaceDiObs[index].diaChiBxDi:homeController.tpDen=listPlaceController.listPlaceDenObs[index].diaChiBxDen;
 
                     print(homeController.tpDi);
                     Get.back();

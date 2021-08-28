@@ -1,12 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart';
-
-import 'package:ticketapp/LocalizationService.dart';
 import 'package:ticketapp/Login/login.dart';
-import 'package:ticketapp/test.dart';
+
 
 
 Future main() async {
@@ -23,12 +20,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
         builder: (BuildContext context, Widget?  child) {
-      ScreenUtil.init(
-          BoxConstraints(
-              maxWidth: MediaQuery.of(context).size.width,
-              maxHeight: MediaQuery.of(context).size.height),
-          designSize: Size(360, 825),
-          orientation: Orientation.portrait);
       return MediaQuery(
         data: MediaQuery.of(context).copyWith(
             textScaleFactor: 0.8), //set desired text scale factor here,
